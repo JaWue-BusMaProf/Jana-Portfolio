@@ -144,6 +144,86 @@ body { /* Textfarbe global auf weiß */ color: var(--text-color); }
 /* Bei Bedarf: Skills‑Pills lesbar machen (weiß auf dunklem Hintergrund) / ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255,0.06); / Beibehalten, oder anpassen */ }
 
 /* Optional: Link‑Hover für bessere Sichtbarkeit */ a:hover { text-decoration:underline; color: #eaf4ff; }
+    /* === Einheitliche Buttons, Headings & Laufbahn-Fix === */
+
+/* Farben / Variablen */
+:root{
+  --heading-color: #b9d3ee;   /* hellblau‑grau für Überschriften */
+  --text-color: #ffffff;      /* weißer Fließtext */
+  --btn-start:   #b9d3ee;     /* Button gradient start */
+  --btn-end:     #eaf4ff;     /* Button gradient end (subtil) */
+  --btn-text:    #072033;     /* dunkler Text auf hellem Button für Kontrast */
+}
+
+/* Überschriften überall */
+h1,h2,h3,h4,h5,h6 {
+  color: var(--heading-color) !important;
+}
+
+/* Fließtext / Karten / Hero */
+body, p, li, .muted, .meta, .tagline, .card, .hero-card {
+  color: var(--text-color) !important;
+}
+
+/* Hero: Titel / Text gezielt */
+.hero-title { color: var(--heading-color) !important; }
+.hero-card, .hero-card * { color: var(--text-color) !important; }
+
+/* Laufbahn: inline-styles zuverlässig überschreiben */
+#laufbahn, #laufbahn * { color: var(--text-color) !important; }
+#laufbahn ol, #laufbahn ol li { color: var(--text-color) !important; }
+
+/* Einheitliche Primary‑Buttons (leichter Verlauf in #b9d3ee) */
+.btn.primary,
+.hero .btn.primary,
+#contact .btn.primary,
+.cta-group .btn.primary {
+  background: linear-gradient(90deg, var(--btn-start), var(--btn-end)) !important;
+  color: var(--btn-text) !important;
+  font-weight: 700;
+  border: 0 !important;
+  padding: 10px 16px !important;
+  border-radius: 10px !important;
+  min-width: 120px;
+  box-shadow: 0 8px 26px rgba(2,8,20,0.12);
+  transition: transform .16s ease, filter .12s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover/Focus für Primary */
+.btn.primary:hover,
+.btn.primary:focus {
+  transform: translateY(-3px);
+  filter: brightness(0.98);
+  outline: none;
+}
+
+/* Ghost / Secondary Buttons einheitlich */
+.btn.ghost,
+.cta-group .btn.ghost,
+#contact .btn.ghost {
+  background: transparent !important;
+  color: var(--text-color) !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  padding: 10px 16px !important;
+  border-radius: 10px !important;
+  min-width: 120px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sicherstellen, dass alle CTA-Gruppen-Buttons identisch aussehen */
+.cta-group .btn, #contact .btn, footer .btn {
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Skills‑Pills lesbar halten */
+ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255,0.06); }
+
   </style>
 </head>
 <body>
