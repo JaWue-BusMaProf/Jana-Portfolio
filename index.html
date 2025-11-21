@@ -18,13 +18,30 @@
     *{box-sizing:border-box} html,body{height:100%}
     body{
       margin:0;
-      background: var(--bg); /* einfarbig hellblau */
-      color:#072033;
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      line-height:1.5; font-size:16px; padding-bottom:48px;
-      position:relative;
-      overflow-x:hidden;
-    }
+  /* langer, sanfter Verlauf: sehr dunkel oben → mittlere Graustufen → hell unten */
+  background: linear-gradient(180deg,
+    #1f2225 0%,
+    #323639 25%,
+    #5f6a70 50%,
+    #d9dde0 80%,
+    #f2f4f5 100%);
+  background-attachment: fixed; /* schöner, ruhiger Gradient auf Desktop */
+  color:#072033;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+  font-size:16px;
+  padding-bottom:48px;
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* Mobile fallback: background-attachment fixed kann auf manchen Handys Probleme machen */
+@media (max-width:720px){
+  body{
+    background-attachment: scroll;
+  }
+}
 
     /* Floating circular avatar in the background (right, larger, more visible) */
     .floating-avatar{
