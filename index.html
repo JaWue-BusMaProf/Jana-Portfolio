@@ -129,6 +129,21 @@
     footer.site-footer{margin-top:22px; text-align:center; color:var(--muted); font-size:14px; padding:22px 8px; background:transparent}
     .reveal{ opacity:0; transform:translateY(8px); transition:opacity .7s ease, transform .7s ease; will-change:opacity, transform;} .reveal.visible{ opacity:1; transform:none; }
     a:focus, button:focus { outline:2px solid rgba(99,150,255,0.4); outline-offset:3px; border-radius:8px; }
+    /* --- Kopierfertiger CSS‑Block — setze überall weiße Schrift und Überschriften in #b9d3ee --- / :root{ / falls du Variablen verwendest, kannst du hier ggf. anpassen */ --heading-color: #b9d3ee; --text-color: #ffffff; }
+
+body { /* Textfarbe global auf weiß */ color: var(--text-color); }
+
+/* Überschriften überall in hellblau‑grau */ h1, h2, h3, h4, h5, h6 { color: var(--heading-color) !important; }
+
+/* Paragraphen, Listen, kleine Meta‑Texte */ p, li, .muted, .meta, .tagline { color: var(--text-color) !important; }
+
+/* Buttons / Links: falls Links zu stark verblassen, stell sicher dass sie ausreichend Kontrast haben */ a, .btn { color: #ffffff; }
+
+/* Falls einzelne Komponenten explizit andere Farben setzen, diese Regeln priorisieren / .card, .hero-card, .panel { / Falls du möchtest, kannst du hier card‑Text explizit auf weiß setzen */ color: var(--text-color); }
+
+/* Bei Bedarf: Skills‑Pills lesbar machen (weiß auf dunklem Hintergrund) / ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255,0.06); / Beibehalten, oder anpassen */ }
+
+/* Optional: Link‑Hover für bessere Sichtbarkeit */ a:hover { text-decoration:underline; color: #eaf4ff; }
   </style>
 </head>
 <body>
