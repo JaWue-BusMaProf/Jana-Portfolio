@@ -9,43 +9,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#071025; --panel:#0f1724; --muted:#9aa7bd; --accent:#3f83ff; --accent-2:#6db2ff;
-      --card-bg: rgba(255,255,255,0.06); --glass-border: rgba(255,255,255,0.05);
-      --radius:12px; --max-width:1080px; --shadow: 0 10px 30px rgba(2,6,23,0.65);
+      --bg:#6FB3FF; --panel:#eaf6ff; --muted:#173646; --accent:#084a9a; --accent-2:#2b7bde;
+      --card-bg: rgba(2,8,20,0.72); --glass-border: rgba(255,255,255,0.06);
+      --radius:12px; --max-width:1080px; --shadow: 0 10px 30px rgba(2,6,23,0.45);
       font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color-scheme: dark;
+      color-scheme: light;
     }
     *{box-sizing:border-box} html,body{height:100%}
     body{
       margin:0;
-      background: linear-gradient(180deg,var(--bg), #05060a 120%);
-      color:#e6eef8;
+      background: var(--bg); /* einfarbig hellblau */
+      color:#072033;
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
       line-height:1.5; font-size:16px; padding-bottom:48px;
       position:relative;
       overflow-x:hidden;
     }
 
-    /* Floating circular avatar in the background */
+    /* Floating circular avatar in the background (right, larger, more visible) */
     .floating-avatar{
       position:fixed;
-      left:6%;
-      top:14%;
-      width:340px;
-      height:340px;
+      right:6%;
+      top:12%;
+      width:420px;
+      height:420px;
       border-radius:50%;
       background-image: url('jana-portrait-800.jpg');
       background-size:cover;
-      background-position: top center;
-      box-shadow: 0 30px 80px rgba(2,6,23,0.6), inset 0 0 40px rgba(255,255,255,0.02);
-      opacity:0.20;
-      filter: saturate(0.9) brightness(0.95);
+      background-position: center; /* mehr Körper sichtbar */
+      box-shadow: 0 40px 120px rgba(2,6,23,0.45), inset 0 0 40px rgba(255,255,255,0.02);
+      opacity:0.48;           /* weniger transparent = deutlicher */
+      filter: saturate(0.98) brightness(0.98);
       transform: translate3d(0,0,0);
       z-index:0;
       pointer-events:none;
       will-change: transform, opacity;
-      transition: opacity .3s ease;
-      animation: floaty 8s ease-in-out infinite;
+      transition: opacity .22s ease;
+      animation: floaty 6s ease-in-out infinite; /* schnellere, stärkere Bewegung */
     }
 
     /* reduce motion support */
@@ -53,16 +53,17 @@
       .floating-avatar { animation: none; }
     }
 
-    /* smaller on mobile & hide on very small screens */
+    /* mobile adjustments */
     @media (max-width:720px){
       .floating-avatar{
-        width:200px;
-        height:200px;
-        left:50%;
+        width:260px;
+        height:260px;
+        right:50%;
+        left:auto;
         top:6%;
-        transform: translateX(-50%);
-        opacity:0.14;
-        animation: none;
+        transform: translateX(50%);
+        opacity:0.28;
+        animation: none; /* Bewegung aus auf kleinen Geräten */
       }
     }
     @media (max-width:420px){
@@ -70,9 +71,11 @@
     }
 
     @keyframes floaty{
-      0% { transform: translate3d(0, -8px, 0); }
-      50% { transform: translate3d(8px, 12px, 0); }
-      100% { transform: translate3d(0, -8px, 0); }
+      0%   { transform: translate3d(0, -22px, 0); }
+      25%  { transform: translate3d(22px, -6px, 0); }
+      50%  { transform: translate3d(0, 28px, 0); }
+      75%  { transform: translate3d(-18px, 6px, 0); }
+      100% { transform: translate3d(0, -22px, 0); }
     }
 
     a{color:var(--accent); text-decoration:none}
@@ -81,31 +84,31 @@
     /* Hero: transparent so background avatar is visible */
     .hero{position:relative; min-height:62vh; display:flex; align-items:center; justify-content:center; overflow:hidden; border-bottom:none; background:transparent;}
     .hero-media{ display:none; }
-    .hero::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(7,16,37,0.42), rgba(3,6,10,0.62)); z-index:1; pointer-events:none; }
+    .hero::after{ content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00)); z-index:1; pointer-events:none; }
 
     .hero-inner{position:relative; z-index:2; width:100%; max-width:var(--max-width); padding:48px 28px; display:flex; gap:22px; align-items:center;}
-    .hero-card{background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border:1px solid var(--glass-border); padding:28px; border-radius:var(--radius); backdrop-filter: blur(6px) saturate(120%); box-shadow:var(--shadow); max-width:820px; width:100%;}
-    .hero-title{margin:0; font-size:clamp(20px,3.6vw,34px); line-height:1.05; letter-spacing:-0.01em; font-weight:700; color:#fff;}
-    .hero-sub{margin:0; color:var(--muted); font-weight:500;}
-    .tagline{margin-top:12px; color: #d6e4ff; font-size:clamp(14px,2.4vw,17px); max-width:70ch;}
+    .hero-card{background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border:1px solid var(--glass-border); padding:28px; border-radius:var(--radius); backdrop-filter: blur(6px) saturate(110%); box-shadow:var(--shadow); max-width:820px; width:100%;}
+    .hero-title{margin:0; font-size:clamp(20px,3.6vw,34px); line-height:1.05; letter-spacing:-0.01em; font-weight:700; color:#031f2f;}
+    .hero-sub{margin:0; color:var(--muted); font-weight:600;}
+    .tagline{margin-top:12px; color: #08324a; font-size:clamp(14px,2.4vw,17px); max-width:70ch;}
     .cta-group{margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;}
     .btn{display:inline-flex; gap:10px; align-items:center; padding:10px 16px; border-radius:10px; font-weight:600; transition:transform .16s ease, box-shadow .16s ease; text-decoration:none;}
-    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#021024; box-shadow: 0 10px 30px rgba(63,131,255,0.18);}    
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff; box-shadow: 0 10px 30px rgba(43,123,222,0.18);}    
     .btn.ghost{background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.06);}    
     .btn:hover{ transform:translateY(-3px); }
 
     main{margin-top:-40px; padding:0 20px; background:transparent}
     .panel{max-width:var(--max-width); margin:0 auto; display:grid; grid-template-columns: 1fr; gap:20px; background:transparent}
-    .card{background:var(--card-bg); border:1px solid rgba(255,255,255,0.04); border-radius:var(--radius); padding:22px; box-shadow: 0 8px 30px rgba(2,6,23,0.45); color:#e6eef8;}
+    .card{background:var(--card-bg); border:1px solid rgba(255,255,255,0.06); border-radius:var(--radius); padding:22px; box-shadow: 0 8px 30px rgba(2,6,23,0.25); color:#e6eef8;}
     .row{display:grid; gap:18px;}
     @media(min-width:880px){ .row.columns-2{ grid-template-columns: 1fr 340px; align-items:start; } main{margin-top:-60px} }
-    h2{margin:0 0 12px 0; font-size:18px; color:#fff;} p, li { color: #cad6e8; margin:0 0 12px 0; }
+    h2{margin:0 0 12px 0; font-size:18px; color:#031f2f;} p, li { color: #08324a; margin:0 0 12px 0; }
     ul.skills{list-style:none; padding:0; margin:0; display:flex; gap:8px; flex-wrap:wrap;}
-    ul.skills li{background:rgba(255,255,255,0.03); padding:8px 10px; border-radius:8px; border:1px solid rgba(255,255,255,0.02); font-weight:600; color:#dfeaff; font-size:14px;}
-    .muted{ color:var(--muted); font-size:14px } .meta{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; color:var(--muted) }
-    .dashboard-grid{display:grid; gap:14px; grid-template-columns: 1fr;} @media(min-width:720px){ .dashboard-grid{ grid-template-columns: 1fr 1fr } }
-    .embed-placeholder{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:10px; height:260px; display:flex; align-items:center; justify-content:center; color:var(--muted); border:1px dashed rgba(255,255,255,0.04); padding:12px; text-align:center;}
-    .embed-iframe{width:100%; height:360px; border:0; border-radius:10px; box-shadow: 0 8px 30px rgba(2,6,23,0.45);}    
+    ul.skills li{background:rgba(255,255,255,0.06); padding:8px 10px; border-radius:8px; border:1px solid rgba(255,255,255,0.02); font-weight:600; color:#08324a; font-size:14px;}
+    .muted{ color:#0b3b53; font-size:14px } .meta{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; color:var(--muted) }
+    .dashboard-grid{display:grid; gap:14px; grid-template-columns: 1fr;} @media(min-width:720px){ .dashboard-grid{ grid-template-columns: repeat(2, 1fr) } }
+    .embed-placeholder{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); border-radius:10px; height:260px; display:flex; align-items:center; justify-content:center; color:var(--muted); border:1px dashed rgba(255,255,255,0.04); padding:12px; text-align:center;}
+    .embed-iframe{width:100%; height:360px; border:0; border-radius:10px; box-shadow: 0 8px 30px rgba(2,6,23,0.25);}    
     footer.site-footer{margin-top:22px; text-align:center; color:var(--muted); font-size:14px; padding:22px 8px; background:transparent}
     .reveal{ opacity:0; transform:translateY(8px); transition:opacity .7s ease, transform .7s ease; will-change:opacity, transform;} .reveal.visible{ opacity:1; transform:none; }
     a:focus, button:focus { outline:2px solid rgba(99,150,255,0.4); outline-offset:3px; border-radius:8px; }
@@ -177,7 +180,59 @@
         </aside>
       </section>
 
-      <!-- restliche Sektionen bleiben unverändert -->
+      <section id="portfolio" class="card reveal" aria-labelledby="portfolio-heading">
+        <h2 id="portfolio-heading">Portfolio — Ausgewählte Projekte & Dashboards</h2>
+        <div class="dashboard-grid" style="margin-top:12px">
+          <article class="card" style="padding:14px;">
+            <h3 style="margin:0 0 8px 0">Power BI — Sales Dashboard</h3>
+            <p class="muted">Interaktives Sales‑Reporting mit Drilldowns, KPI‑Monitoring und Trendanalysen. (Power BI Desktop / Service)</p>
+            <p style="margin-top:8px"><a href="#" aria-label="Sales Dashboard öffnen">Live‑Report / Screenshot ansehen →</a></p>
+          </article>
+
+          <article class="card" style="padding:14px;">
+            <h3 style="margin:0 0 8px 0">Reporting Automation — Monatsreport</h3>
+            <p class="muted">Automatisierte Datenaufbereitung mit Power Query & Excel‑Templates, inkl. KPI‑Snapshot und Verteilungsauswertung.</p>
+            <p style="margin-top:8px"><a href="#" aria-label="Monatsreport öffnen">Mehr dazu →</a></p>
+          </article>
+
+          <article class="card" style="padding:14px;">
+            <h3 style="margin:0 0 8px 0">Prozessoptimierung — Order2Cash</h3>
+            <p class="muted">Projekt zur Prozessvereinfachung im Forderungsbereich: Workflow‑Analyse, Quick‑Wins & Umsetzungsvorschlag.</p>
+            <p style="margin-top:8px"><a href="#" aria-label="Order2Cash Case Study öffnen">Case Study →</a></p>
+          </article>
+        </div>
+
+        <p style="margin-top:12px" class="muted">Wenn du Links, Bilder oder Embed‑URLs für die Projekte hast, füge ich sie direkt in die Karten ein.</p>
+      </section>
+
+      <section id="laufbahn" class="card reveal" aria-labelledby="laufbahn-heading">
+        <h2 id="laufbahn-heading">Laufbahn</h2>
+        <ol style="margin:0 0 0 18px; padding:0; color:var(--muted)">
+          <li style="margin-bottom:8px"><strong>2022–heute</strong> — Position / Unternehmen (Kurzbeschreibung)</li>
+          <li style="margin-bottom:8px"><strong>2019–2021</strong> — Frühere Rolle (Kurzbeschreibung)</li>
+          <li style="margin-bottom:8px"><strong>Abschluss</strong> — Master / Hochschule</li>
+        </ol>
+      </section>
+
+      <section id="skills" class="card reveal" aria-labelledby="skills-heading">
+        <h2 id="skills-heading">Skills & Tools</h2>
+        <ul class="skills" aria-label="Liste der Fähigkeiten">
+          <li>Controlling</li><li>Reporting</li><li>Power BI</li><li>Excel (Power Query)</li><li>Microsoft 365 Copilot</li>
+        </ul>
+      </section>
+
+      <section id="contact" class="card reveal" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Kontakt</h2>
+        <p>Am schnellsten erreichbar per E‑Mail oder Telefon. Für Bewerbungen: CV herunterladen & direkt mitschicken.</p>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px">
+          <a class="btn primary" href="mailto:jana@example.com?subject=Kontakt%20via%20Portfolio">E‑Mail schreiben</a>
+          <a class="btn ghost" href="Jana_Wuensch_CV.pdf" download>CV herunterladen</a>
+        </div>
+
+        <p class="muted" style="margin-top:12px">Hinweis: Diese Seite ist für Bewerbungszwecke und LinkedIn‑Sharing gedacht.</p>
+      </section>
+
     </div>
   </main>
 
@@ -203,8 +258,8 @@
         const vh = window.innerHeight;
         const cx = e.clientX / vw - 0.5; // -0.5 .. 0.5
         const cy = e.clientY / vh - 0.5;
-        const tx = cx * 18; // px
-        const ty = cy * 12;
+        const tx = cx * 40; // increased parallax strength
+        const ty = cy * 30; // increased parallax strength
         // combine with base floaty animation using translate3d
         avatar.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
       }
