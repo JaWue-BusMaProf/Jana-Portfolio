@@ -226,6 +226,61 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
 
   </style>
 </head>
+ <!-- Power BI Lightbox Modal (insert once before </body>) -->
+<div id="pb-modal" role="dialog" aria-hidden="true" aria-label="Power BI Vorschau" style="display:none; position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);">
+  <div style="max-width:1100px;width:94%;max-height:88vh;border-radius:10px;overflow:auto;background:#fff;padding:12px;box-shadow:0 20px 60px rgba(2,6,23,0.5);position:relative;">
+    <button id="pb-modal-close" aria-label="Schließen" style="position:absolute;right:8px;top:8px;background:#fff;border:1px solid #ddd;border-radius:6px;padding:6px 8px;cursor:pointer;">✕</button>
+    <img id="pb-modal-img" src="" alt="Große Vorschau Power BI Dashboard" style="width:100%;height:auto;border-radius:6px;display:block;" />
+    <div style="margin-top:8px;display:flex;gap:8px;align-items:center;justify-content:flex-end;">
+      <a id="pb-modal-open-link" href="#" target="_blank" rel="noopener" style="background:#0b66c3;color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Interaktiven Report öffnen</a>
+    </div>
+  </div>
+</div> 
+  <script>
+  (function(){
+    const thumbBtns = document.querySelectorAll('.pb-thumb-btn');
+    const modal = document.getElementById('pb-modal');
+    const modalImg = document.getElementById('pb-modal-img');
+    const closeBtn = document.getElementById('pb-modal-close');
+    const openLink = document.getElementById('pb-modal-open-link');
+    let lastFocused = null;
+
+    function openModal(imgSrc, linkHref, triggerEl){
+      modalImg.src = imgSrc;
+      modalImg.alt = 'Große Vorschau';
+      openLink.href = linkHref || '#';
+      modal.style.display = 'flex';
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      lastFocused = triggerEl;
+      closeBtn.focus();
+    }
+
+    function closeModal(){
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+      modalImg.src = '';
+      if(lastFocused) lastFocused.focus();
+    }
+
+    thumbBtns.forEach(btn=>{
+      btn.addEventListener('click', function(){
+        const img = this.dataset.img;
+        const link = this.dataset.link;
+        openModal(img, link, this);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e){
+      if(e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+    });
+  })();
+</script>
 <body>
   <!-- Floating circular avatar in background -->
   <div class="floating-avatar" aria-hidden="true"></div>
@@ -295,23 +350,39 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
       <section id="portfolio" class="card reveal" aria-labelledby="portfolio-heading">
         <h2 id="portfolio-heading">Portfolio — Ausgewählte Projekte & Dashboards</h2>
         <div class="dashboard-grid" style="margin-top:12px">
-          <article class="card" style="padding:14px;">
-            <h3 style="margin:0 0 8px 0">Power BI — Sales Dashboard</h3>
-            <p class="muted">Interaktives Sales‑Reporting mit Drilldowns, KPI‑Monitoring und Trendanalysen. (Power BI Desktop / Service)</p>
-            <p style="margin-top:8px"><a href="#" aria-label="Sales Dashboard öffnen">Live‑Report / Screenshot ansehen →</a></p>
-          </article>
+          <!-- Power BI Card: Thumbnail (uses image in repo root: screen_hard_soft.png) -->
+<article class="card" style="padding:14px;">
+  <h3 style="margin:0 0 8px 0">Power BI — Sales Dashboard</h3>
+
+  <!-- button holds data attributes for modal: data-img = filename in repo root, data-link = optional report link -->
+  <button class="pb-thumb-btn" type="button" data-img="screen_hard_soft.png" data-link="#" aria-label="Vorschau öffnen" style="border:0;background:transparent;padding:0;cursor:pointer;">
+    <img
+      src="screen_hard_soft.png"
+      alt="Screenshot des Power BI Sales Dashboard"
+      style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
+    />
+  </button>
+
+  <p class="muted" style="margin-top:8px">
+    Interaktive Vorschau (Screenshot). Wenn du später einen Link zum Power BI Service hast, setze data-link auf die Report‑URL (öffnet im Modal).
+  </p>
+</article>
 
           <article class="card" style="padding:14px;">
-            <h3 style="margin:0 0 8px 0">Reporting Automation — Monatsreport</h3>
-            <p class="muted">Automatisierte Datenaufbereitung mit Power Query & Excel‑Templates, inkl. KPI‑Snapshot und Verteilungsauswertung.</p>
-            <p style="margin-top:8px"><a href="#" aria-label="Monatsreport öffnen">Mehr dazu →</a></p>
-          </article>
+  <h3 style="margin:0 0 8px 0">Power BI — Sales Dashboard</h3>
 
-          <article class="card" style="padding:14px;">
-            <h3 style="margin:0 0 8px 0">Prozessoptimierung — Order2Cash</h3>
-            <p class="muted">Projekt zur Prozessvereinfachung im Forderungsbereich: Workflow‑Analyse, Quick‑Wins & Umsetzungsvorschlag.</p>
-            <p style="margin-top:8px"><a href="#" aria-label="Order2Cash Case Study öffnen">Case Study →</a></p>
-          </article>
+  <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png" target="_blank" rel="noopener" aria-label="Screenshot in neuem Tab öffnen">
+    <img
+      src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png"
+      alt="Screenshot des Power BI Sales Dashboard"
+      style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
+    />
+  </a>
+
+  <p class="muted" style="margin-top:8px">
+    Screenshot (klicken zum Vergrößern). Wenn du später einen Live‑Report verlinken willst, ersetze die href‑URL durch den Report‑Link.
+  </p>
+</article>
         </div>
 
         <p style="margin-top:12px" class="muted">Wenn du Links, Bilder oder Embed‑URLs für die Projekte hast, füge ich sie direkt in die Karten ein.</p>
