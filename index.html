@@ -381,6 +381,36 @@ header.hero .hero-inner .hero-card .hero-sub,
     z-index: 7 !important;           /* unter Avatar, über Hintergrund */
   }
 }
+    /* BG Splats - dezente türkise Farbkleckse (ans Ende des <style>-Blocks) */
+#bg-splats {
+  position: fixed;
+  inset: 0;
+  z-index: -5;            /* hinter avatar/hero-card */
+  pointer-events: none;
+  overflow: visible;
+}
+
+#bg-splats-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#splats circle {
+  will-change: transform, opacity;
+  opacity: 0;
+  filter: url(#splatBlur);
+}
+
+/* mobile tuning */
+@media (max-width:720px) {
+  #bg-splats { z-index: -6; }
+}
+
+/* reduced motion: hide */
+@media (prefers-reduced-motion: reduce) {
+  #bg-splats { display: none !important; }
+}
   </style>
 </head>
  <!-- Power BI Lightbox Modal (insert once before </body>) -->
@@ -439,6 +469,17 @@ header.hero .hero-inner .hero-card .hero-sub,
   })();
 </script>
 <body>
+  <!-- BG Splats: dezente türkise Farbklekse (einfügen in <body>, z.B. nach .floating-avatar) -->
+<div id="bg-splats" aria-hidden="true">
+  <svg id="bg-splats-svg" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" role="presentation">
+    <defs>
+      <filter id="splatBlur" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="18" />
+      </filter>
+    </defs>
+    <g id="splats" transform="translate(0,0)"></g>
+  </svg>
+</div>
   <!-- Floating circular avatar in background -->
   <div class="floating-avatar" aria-hidden="true"></div>
 
@@ -659,5 +700,107 @@ header.hero .hero-inner .hero-card .hero-sub,
       }); });
     })();
   </script>
+  <script>
+(function(){
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const svgNS = "http://www.w3.org/2000/svg";
+  const container = document.getElementById('splats');
+  const svg = document.getElementById('bg-splats-svg');
+  if(!container || !svg) return;
+
+  // Sichtbarer: mehr Splats + stärkere Alpha + größere Größen
+  const maxSplats = 12;          // mehr Klekse
+  const splats = [];
+  const baseColor = 'hsla(185,85%,48%,0.44)'; // kräftigeres Türkis, höhere Alpha
+  const minR = 48, maxR = 140;   // größere Splash-Größen
+  const verticalRange = [ -0.12, 0.55 ]; // etwas mehr Vertikalbereich
+
+  for(let i=0;i<maxSplats;i++){
+    // Erzeuge gelegentlich Ellipsen statt Kreise für organischere Form
+    const useEllipse = Math.random() > 0.45;
+    const el = useEllipse ? document.createElementNS(svgNS,'ellipse') : document.createElementNS(svgNS,'circle');
+    const r = Math.round(minR + Math.random()*(maxR-minR));
+    const cx = Math.round(Math.random()*1000);
+    const cy = Math.round((verticalRange[0] + Math.random()*(verticalRange[1]-verticalRange[0]))*600);
+
+    if(useEllipse){
+      el.setAttribute('rx', Math.round(r * (0.9 + Math.random()*0.8)));
+      el.setAttribute('ry', Math.round(r * (0.5 + Math.random()*0.7)));
+    } else {
+      el.setAttribute('r', r);
+    }
+    el.setAttribute('cx', cx);
+    el.setAttribute('cy', cy);
+    el.setAttribute('fill', baseColor);
+    el.style.opacity = 0;
+    container.appendChild(el);
+
+    splats.push({
+      el: el,
+      type: useEllipse ? 'ellipse' : 'circle',
+      baseR: r,
+      baseCx: cx,
+      baseCy: cy,
+      jitter: Math.random()
+    });
+  }
+
+  function getProgress(){
+    const range = window.innerHeight * 1.6; // noch intensiver: Effekt früher sichtbar
+    return Math.min(1, Math.max(0, window.scrollY / range));
+  }
+
+  function update(){
+    const progress = getProgress();
+    const visible = Math.round(progress * maxSplats);
+    splats.forEach((s, i) => {
+      const el = s.el;
+      if(i < visible){
+        const localProg = Math.min(1, Math.max(0, (progress - (i/maxSplats)*0.06) / (1 - (i/maxSplats)*0.06)));
+        const scale = 1.0 + localProg * (1.6 + s.jitter*0.9); // stärkeres skalieren
+        if(s.type === 'ellipse'){
+          el.setAttribute('rx', Math.round(s.baseR * (0.9 + scale*0.6)));
+          el.setAttribute('ry', Math.round(s.baseR * (0.45 + scale*0.9)));
+        } else {
+          el.setAttribute('r', Math.round(s.baseR * scale));
+        }
+        const ty = s.baseCy + (localProg * 110 * (s.jitter - 0.5)); // stärkere Vertikalbewegung
+        el.setAttribute('cy', ty);
+        // deutlichere Opacity-Kurve: beginnt etwas höher, wird sichtbarer
+        el.style.opacity = 0.06 + localProg * 0.38;
+      } else {
+        // ausblenden langsamer
+        const current = parseFloat(el.style.opacity || 0);
+        el.style.opacity = Math.max(0, current - 0.02);
+      }
+    });
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if(!ticking){ ticking = true; requestAnimationFrame(()=>{ update(); ticking=false; }); }
+  }, {passive:true});
+
+  update();
+  window.addEventListener('resize', () => {
+    splats.forEach(s => {
+      const newCx = Math.round(Math.random()*1000);
+      const newCy = Math.round((verticalRange[0] + Math.random()*(verticalRange[1]-verticalRange[0]))*600);
+      s.baseCx = newCx;
+      s.baseCy = newCy;
+      s.el.setAttribute('cx', newCx);
+      s.el.setAttribute('cy', newCy);
+      // reset size
+      if(s.type === 'ellipse'){
+        s.el.setAttribute('rx', Math.round(s.baseR * (0.9 + Math.random()*0.8)));
+        s.el.setAttribute('ry', Math.round(s.baseR * (0.5 + Math.random()*0.7)));
+      } else {
+        s.el.setAttribute('r', s.baseR);
+      }
+    });
+    update();
+  });
+})();
+</script>
 </body>
 </html>
