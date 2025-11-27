@@ -302,6 +302,14 @@ header.hero .hero-inner .hero-card .hero-sub,
   color: var(--heading-color) !important;
   font-weight: 600 !important;
 }
+    @media (max-width:720px) {
+  body {
+    background-repeat: no-repeat !important;
+    background-position: top center !important;
+    background-size: 100% 100vh !important; /* dehnt den Gradient über die Viewporthöhe - kein Kacheln */
+    background-attachment: scroll !important;
+  }
+}
   </style>
 </head>
  <!-- Power BI Lightbox Modal (insert once before </body>) -->
