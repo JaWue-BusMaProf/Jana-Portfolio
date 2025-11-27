@@ -138,6 +138,14 @@
     }
     @media (max-width:420px){
       .floating-avatar{ display:none; }
+      @media (max-width:720px) {
+  body {
+    background-repeat: no-repeat !important;
+    background-position: top center !important;
+    background-size: 100% 100vh !important; /* dehnt den Gradient über die Viewporthöhe - kein Kacheln */
+    background-attachment: scroll !important;
+  }
+}
     }
 
     @keyframes floaty{
