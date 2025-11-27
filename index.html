@@ -68,6 +68,31 @@
     .floating-avatar { display: none; }
     .hero-inner{ padding: 28px 16px; }
     .hero{ min-height: auto; padding-top: 18px; padding-bottom: 18px; }
+    /* Robust: fixed Gradient-Layer via body::before (kein Kacheln, glatter Übergang) */
+@media (max-width:720px) {
+  body {
+    position: relative; /* nötig für das pseudo-element stacking */
+    background: none;   /* entferne direkten body-gradient */
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(180deg,
+      hsl(210 12% 12%) 0%,
+      hsl(210 10% 24%) 28%,
+      hsl(210 12% 44%) 56%,
+      hsl(210 18% 88%) 84%,
+      hsl(210 30% 96%) 100%);
+    background-repeat: no-repeat;
+    background-size: cover; /* deckt Viewport ab, kein Wiederholen */
+    will-change: transform, opacity;
+    opacity: 1;
+  }
+}
   }
 }
 
