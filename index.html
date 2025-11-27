@@ -701,7 +701,8 @@ header.hero .hero-inner .hero-card .hero-sub,
       }); });
     })();
   </script>
-<script>
+
+  <script>
 (function(){
   if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const svgNS = "http://www.w3.org/2000/svg";
@@ -740,8 +741,6 @@ header.hero .hero-inner .hero-card .hero-sub,
     } else {
       el.setAttribute('r', r);
     }
-    el.setAttribute('cx', 0);
-    el.setAttribute('cy', 0);
     el.setAttribute('fill', baseColor);
     el.style.opacity = 0;
     // initial transform position (GPU)
@@ -779,7 +778,7 @@ header.hero .hero-inner .hero-card .hero-sub,
         const rot = s.angle + localProg * (10 * (s.jitter - 0.5));  // leichte rotation
         el.style.transform = `translate(${tx}px, ${ty}px) scale(${scale}) rotate(${rot}deg)`;
         // auffälligere opacity-curve
-        el.style.opacity = (0.18 + localProg * 0.60).toString();
+        el.style.opacity = 0.18 + localProg * 0.60;
       } else {
         const current = parseFloat(el.style.opacity || 0);
         el.style.opacity = Math.max(0, current - 0.015);
