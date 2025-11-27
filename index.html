@@ -169,9 +169,7 @@ body, p, li, .muted, .meta, .tagline, .card, .hero-card {
 .hero-title { color: var(--heading-color) !important; }
 .hero-card, .hero-card * { color: var(--text-color) !important; }
 
-/* Laufbahn: inline-styles zuverlässig überschreiben */
-#laufbahn, #laufbahn * { color: var(--text-color) !important; }
-#laufbahn ol, #laufbahn ol li { color: var(--text-color) !important; }
+
 
 /* Einheitliche Primary‑Buttons (leichter Verlauf in #b9d3ee) */
 .btn.primary,
@@ -223,12 +221,26 @@ body, p, li, .muted, .meta, .tagline, .card, .hero-card {
 
 /* Skills‑Pills lesbar halten */
 ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255,0.06); }
-/* Laufbahn-Überschrift gezielt blau machen (Override der globalen !important-Regel) */
-#laufbahn h2#laufbahn-heading {
-  color: var(--#b9d3ee) !important;
+/* --- Laufbahn: gezielte Farben statt globalem Override --- */
+/* Listen in Laufbahn weiterhin weißen Fließtext behalten */
+#laufbahn ol,
+#laufbahn ol li {
+  color: var(--text-color) !important;
+}
+
+/* Überschriften in Laufbahn in der gleichen Farbe wie andere Headlines */
+#laufbahn h2,
+#laufbahn h2#laufbahn-heading,
+#laufbahn-heading {
+  color: var(--heading-color) !important;
   font-weight: 600;
 }
-.hero-sub { color: var(--#b9d3ee) !important; font-weight:600; }    
+
+/* Hero-Subtitle ebenfalls auf heading-color setzen */
+.hero-sub {
+  color: var(--heading-color) !important;
+  font-weight: 600;
+}
   </style>
 </head>
  <!-- Power BI Lightbox Modal (insert once before </body>) -->
