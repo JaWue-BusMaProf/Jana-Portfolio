@@ -345,6 +345,42 @@ header.hero .hero-inner .hero-card .hero-sub,
     z-index: 4 !important; /* < .floating-avatar, > Hintergrund */
   }
 }
+    /* Mobile: Avatar oben, zentriert, weniger störend + Hero-Card weiter unten */
+@media (max-width:720px) {
+  /* Gradient-Layer beibehalten (falls du body::before nutzt), ggf. etwas mehr Überhang */
+  body::before {
+    top: -10vh !important;
+    height: calc(100% + 20vh) !important;
+  }
+
+  /* Avatar: zentriert über der Card, höher platziert und deutlich weniger opak */
+  .floating-avatar {
+    left: 50% !important;
+    right: auto !important;
+    top: 0.5% !important;            /* HÖHER: kleinerer Wert = weiter oben */
+    transform: translate(-50%, 0) !important; /* sauber zentrieren */
+    width: 320px !important;         /* ggf. anpassen (280–360px testen) */
+    height: 320px !important;
+    opacity: 0.22 !important;        /* weniger störend beim Lesen */
+    z-index: 9 !important;           /* sicher über der hero-card */
+    pointer-events: none !important;
+  }
+
+  /* Hero: Card sichtbar lassen, overflow sichtbar damit Avatar nicht abgeschnitten wird */
+  .hero {
+    overflow: visible !important;
+  }
+
+  /* Hero-Card weiter nach unten schieben (doppelt so groß wie zuvor) */
+  .hero-inner {
+    padding-top: 180px !important;   /* Erhöhe / verringere bis das Bild passend liegt */
+  }
+
+  .hero-card {
+    position: relative !important;
+    z-index: 7 !important;           /* unter Avatar, über Hintergrund */
+  }
+}
   </style>
 </head>
  <!-- Power BI Lightbox Modal (insert once before </body>) -->
