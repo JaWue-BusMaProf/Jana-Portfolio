@@ -104,7 +104,7 @@
     .hero::after{ content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00)); z-index:1; pointer-events:none; }
 
     .hero-inner{position:relative; z-index:2; width:100%; max-width:var(--max-width); padding:48px 28px; display:flex; gap:22px; align-items:center;}
-    .hero-card{background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border:1px solid var(--glass-border); padding:28px; border-radius:var(--radius); backdrop-filter: blur(6px) saturate(110%); box-shadow:var(--shadow); max-width:820px; width:100%;}
+    .hero-card{background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border:1px solid var(--glass-border); padding:28px; border-radius:var(--radius); backdrop-filte[...]
     .hero-title{margin:0; font-size:clamp(20px,3.6vw,34px); line-height:1.05; letter-spacing:-0.01em; font-weight:700; color:#031f2f;}
     .hero-sub{margin:0; color:var(--muted); font-weight:600;}
     .tagline{margin-top:12px; color: #08324a; font-size:clamp(14px,2.4vw,17px); max-width:70ch;}
@@ -124,13 +124,13 @@
     ul.skills li{background:rgba(255,255,255,0.06); padding:8px 10px; border-radius:8px; border:1px solid rgba(255,255,255,0.02); font-weight:600; color:#08324a; font-size:14px;}
     .muted{ color:#0b3b53; font-size:14px } .meta{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; color:var(--muted) }
     .dashboard-grid{display:grid; gap:14px; grid-template-columns: 1fr;} @media(min-width:720px){ .dashboard-grid{ grid-template-columns: repeat(2, 1fr) } }
-    .embed-placeholder{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); border-radius:10px; height:260px; display:flex; align-items:center; justify-content:center; color:var(--muted); border:1px dashed rgba(255,255,255,0.04); padding:12px; text-align:center;}
+    .embed-placeholder{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); border-radius:10px; height:260px; display:flex; align-items:center; justify-content:cent[...]
     .embed-iframe{width:100%; height:360px; border:0; border-radius:10px; box-shadow: 0 8px 30px rgba(2,6,23,0.25);}    
     footer.site-footer{margin-top:22px; text-align:center; color:var(--muted); font-size:14px; padding:22px 8px; background:transparent}
     .reveal{ opacity:0; transform:translateY(8px); transition:opacity .7s ease, transform .7s ease; will-change:opacity, transform;} .reveal.visible{ opacity:1; transform:none; }
     a:focus, button:focus { outline:2px solid rgba(99,150,255,0.4); outline-offset:3px; border-radius:8px; }
-    /* --- Kopierfertiger CSS‑Block — setze überall weiße Schrift und Überschriften in #b9d3ee --- / :root{ / falls du Variablen verwendest, kannst du hier ggf. anpassen */ --heading-color: #b9d3ee; --text-color: #ffffff; }
-
+    /* --- Kopierfertiger CSS‑Block — setze überall weiße Schrift und Überschriften in #b9d3ee --- / :root{ / falls du Variablen verwendest, kannst du hier ggf. anpassen */ --heading-color[...]
+ 
 body { /* Textfarbe global auf weiß */ color: var(--text-color); }
 
 /* Überschriften überall in hellblau‑grau */ h1, h2, h3, h4, h5, h6 { color: var(--heading-color) !important; }
@@ -139,10 +139,10 @@ body { /* Textfarbe global auf weiß */ color: var(--text-color); }
 
 /* Buttons / Links: falls Links zu stark verblassen, stell sicher dass sie ausreichend Kontrast haben */ a, .btn { color: #ffffff; }
 
-/* Falls einzelne Komponenten explizit andere Farben setzen, diese Regeln priorisieren / .card, .hero-card, .panel { / Falls du möchtest, kannst du hier card‑Text explizit auf weiß setzen */ color: var(--text-color); }
+/* Falls einzelne Komponenten explizit andere Farben setzen, diese Regeln priorisieren / .card, .hero-card, .panel { / Falls du möchtest, kannst du hier card‑Text explizit auf weiß setzen */ [...]
 
-/* Bei Bedarf: Skills‑Pills lesbar machen (weiß auf dunklem Hintergrund) / ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255,0.06); / Beibehalten, oder anpassen */ }
-
+/* Bei Bedarf: Skills‑Pills lesbar machen (weiß auf dunklem Hintergrund) / ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255,0.06); / Beibehalten, oder anpassen [...]
+ 
 /* Optional: Link‑Hover für bessere Sichtbarkeit */ a:hover { text-decoration:underline; color: #eaf4ff; }
     /* === Einheitliche Buttons, Headings & Laufbahn-Fix === */
 
@@ -227,12 +227,12 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
   </style>
 </head>
  <!-- Power BI Lightbox Modal (insert once before </body>) -->
-<div id="pb-modal" role="dialog" aria-hidden="true" aria-label="Power BI Vorschau" style="display:none; position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);">
+<div id="pb-modal" role="dialog" aria-hidden="true" aria-label="Power BI Vorschau" style="display:none; position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rg[...]
   <div style="max-width:1100px;width:94%;max-height:88vh;border-radius:10px;overflow:auto;background:#fff;padding:12px;box-shadow:0 20px 60px rgba(2,6,23,0.5);position:relative;">
-    <button id="pb-modal-close" aria-label="Schließen" style="position:absolute;right:8px;top:8px;background:#fff;border:1px solid #ddd;border-radius:6px;padding:6px 8px;cursor:pointer;">✕</button>
+    <button id="pb-modal-close" aria-label="Schließen" style="position:absolute;right:8px;top:8px;background:#fff;border:1px solid #ddd;border-radius:6px;padding:6px 8px;cursor:pointer;">✕</bu[...]
     <img id="pb-modal-img" src="" alt="Große Vorschau Power BI Dashboard" style="width:100%;height:auto;border-radius:6px;display:block;" />
     <div style="margin-top:8px;display:flex;gap:8px;align-items:center;justify-content:flex-end;">
-      <a id="pb-modal-open-link" href="#" target="_blank" rel="noopener" style="background:#0b66c3;color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Interaktiven Report öffnen</a>
+      <a id="pb-modal-open-link" href="#" target="_blank" rel="noopener" style="background:#0b66c3;color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600;display:inlin[...]
     </div>
   </div>
 </div> 
@@ -313,8 +313,8 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
       <section class="row columns-2 reveal" id="about" aria-labelledby="about-heading">
         <div class="card" role="article" aria-labelledby="about-heading">
           <h2 id="about-heading">Über mich</h2>
-          <p>Ich bin Betriebswirtin mit großer Leidenschaft für Digitalisierung, KI und datengestützte Entscheidungen. Wenn moderne Tools Prozesse vereinfachen, Entscheidungen verbessern oder Workflows spürbar beschleunigen, ergibt sich echter Mehrwert.</p>
-
+          <p>Ich bin Betriebswirtin mit großer Leidenschaft für Digitalisierung, KI und datengestützte Entscheidungen. Wenn moderne Tools Prozesse vereinfachen, Entscheidungen verbessern oder [...]
+ 
           <h3 style="margin-top:14px; margin-bottom:8px; color:var(--muted); font-size:14px">Kern</h3>
           <ul>
             <li>Controlling, Reporting & KPI-Analysen</li>
@@ -350,37 +350,54 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
       <section id="portfolio" class="card reveal" aria-labelledby="portfolio-heading">
         <h2 id="portfolio-heading">Portfolio — Ausgewählte Projekte & Dashboards</h2>
         <div class="dashboard-grid" style="margin-top:12px">
-          <!-- Power BI Card: Thumbnail (uses image in repo root: screen_hard_soft.png) -->
+          <!-- Portrait Card: öffnet in neuem Tab -->
 <article class="card" style="padding:14px;">
-  <h3 style="margin:0 0 8px 0">Power BI — Sales Dashboard</h3>
+  <h3 style="margin:0 0 8px 0">Portrait — Jana Wünsch</h3>
 
-  <!-- button holds data attributes for modal: data-img = filename in repo root, data-link = optional report link -->
-  <button class="pb-thumb-btn" type="button" data-img="screen_hard_soft.png" data-link="#" aria-label="Vorschau öffnen" style="border:0;background:transparent;padding:0;cursor:pointer;">
+  <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/jana-portrait-800.jpg" target="_blank" rel="noopener" aria-label="Portrait in neuem Tab öffnen">
     <img
-      src="screen_hard_soft.png"
-      alt="Screenshot des Power BI Sales Dashboard"
-      style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
-    />
-  </button>
-
-  <p class="muted" style="margin-top:8px">
-    Interaktive Vorschau (Screenshot). Wenn du später einen Link zum Power BI Service hast, setze data-link auf die Report‑URL (öffnet im Modal).
-  </p>
-</article>
-
-          <article class="card" style="padding:14px;">
-  <h3 style="margin:0 0 8px 0">Power BI — Sales Dashboard</h3>
-
-  <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png" target="_blank" rel="noopener" aria-label="Screenshot in neuem Tab öffnen">
-    <img
-      src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png"
-      alt="Screenshot des Power BI Sales Dashboard"
+      src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/jana-portrait-800.jpg"
+      alt="Portrait von Jana Wünsch"
       style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
     />
   </a>
 
   <p class="muted" style="margin-top:8px">
-    Screenshot (klicken zum Vergrößern). Wenn du später einen Live‑Report verlinken willst, ersetze die href‑URL durch den Report‑Link.
+    Klicken zum Vergrößern (öffnet in neuem Tab).
+  </p>
+</article>
+
+          <!-- Impact vs Effort Card: öffnet in neuem Tab -->
+<article class="card" style="padding:14px;">
+  <h3 style="margin:0 0 8px 0">Impact vs. Effort — Analyse</h3>
+
+  <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png" target="_blank" rel="noopener" aria-label="Impact vs Effort Bild in neuem Tab öffnen">
+    <img
+      src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png"
+      alt="Impact vs Effort Visual"
+      style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
+    />
+  </a>
+
+  <p class="muted" style="margin-top:8px">
+    Klicken zum Vergrößern (öffnet in neuem Tab).
+  </p>
+</article>
+
+          <!-- Interessen Card: öffnet in neuem Tab -->
+<article class="card" style="padding:14px;">
+  <h3 style="margin:0 0 8px 0">Interessen</h3>
+
+  <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png" target="_blank" rel="noopener" aria-label="Interessen Bild in neuem Tab öffnen">
+    <img
+      src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png"
+      alt="Interessen Visual"
+      style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
+    />
+  </a>
+
+  <p class="muted" style="margin-top:8px">
+    Klicken zum Vergrößern (öffnet in neuem Tab).
   </p>
 </article>
         </div>
