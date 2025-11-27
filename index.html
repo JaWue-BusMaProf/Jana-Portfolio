@@ -37,9 +37,37 @@
 }
 
 /* Mobile fallback: background-attachment fixed kann auf manchen Handys Probleme machen */
-@media (max-width:720px){
+/* Mobile: vereinfachter Hintergrund, besserer Kontrast für Karten, weniger sichtbarer Avatar */
+@media (max-width:720px) {
+  /* Weniger dramatischer Gradient auf kleinen Bildschirmen */
   body{
-    background-attachment: scroll;
+    background: linear-gradient(180deg,
+      #2f3336 0%,
+      #9aa3a8 50%,
+      #e9eef0 100%);
+    background-attachment: scroll; /* bereits gesetzt, hier zur Sicherheit */
+  }
+
+  /* Karten etwas undurchsichtiger, damit Text besser lesbar ist */
+  .card, .hero-card {
+    background: rgba(2,8,20,0.84); /* mehr Kontrast auf mobilen Geräten */
+    border: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(6px);    /* leichter Glass‑Effekt, verbessert Lesbarkeit */
+  }
+
+  /* Avatar reduzieren / ausblenden bei mittleren Breiten, um Überlappung zu vermeiden */
+  .floating-avatar {
+    opacity: 0.18;
+    right: 50%;
+    transform: translateX(40%);
+    pointer-events: none;
+  }
+
+  /* Auf sehr kleinen Geräten ganz ausblenden (sicherer Kontrast) */
+  @media (max-width:420px) {
+    .floating-avatar { display: none; }
+    .hero-inner{ padding: 28px 16px; }
+    .hero{ min-height: auto; padding-top: 18px; padding-bottom: 18px; }
   }
 }
 
