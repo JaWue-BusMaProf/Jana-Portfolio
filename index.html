@@ -716,7 +716,7 @@ header.hero .hero-inner .hero-card .hero-sub,
   const svg = document.getElementById('bg-splats-svg');
   if(!container || !svg) return;
 
-  // Detect mobile for performance tuning
+  // Detect mobile for performance tuning (checked once at init; CSS handles filter switching on resize)
   const isMobile = window.innerWidth <= 720;
 
   // More visible: more splats + stronger alpha + larger sizes
@@ -744,9 +744,8 @@ header.hero .hero-inner .hero-card .hero-sub,
     el.setAttribute('cy', cy);
     el.setAttribute('fill', baseColor);
     el.style.opacity = 0;
-    // Set transform origin for scale transforms
+    // Set transform origin for scale transforms (center center works across browsers)
     el.style.transformOrigin = 'center center';
-    el.style.transformBox = 'fill-box';
     container.appendChild(el);
 
     splats.push({
