@@ -709,6 +709,13 @@ header.hero .hero-inner .hero-card .hero-sub,
     })();
   </script>
   <script>
+    // Early return on mobile to avoid creating splats (better perf)
+if (window.matchMedia && window.matchMedia('(max-width:720px)').matches) {
+  // Optional: still ensure the SVG exists or remove it if you want
+  const el = document.getElementById('bg-splats');
+  if (el) el.style.display = 'none';
+  return;
+}
 (function(){
   if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const svgNS = "http://www.w3.org/2000/svg";
