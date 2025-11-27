@@ -18,75 +18,42 @@
     *{box-sizing:border-box} html,body{height:100%}
     body{
       margin:0;
-  /* langer, sanfter Verlauf: sehr dunkel oben → mittlere Graustufen → hell unten */
-  background: linear-gradient(180deg,
-    #1f2225 0%,
-    #323639 25%,
-    #5f6a70 50%,
-    #d9dde0 80%,
-    #f2f4f5 100%);
-  background-attachment: fixed; /* schöner, ruhiger Gradient auf Desktop */
-  color:#072033;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.5;
-  font-size:16px;
-  padding-bottom:48px;
-  position:relative;
-  overflow-x:hidden;
-}
-
-/* Mobile fallback: background-attachment fixed kann auf manchen Handys Probleme machen */
-@media (max-width:720px){
-  body{
-    background-attachment: scroll;
-  }
-}
-
-    /* Floating circular avatar in the background (right, larger, more visible) */
-    .floating-avatar{
-      position:fixed;
-      right:6%;
-      top:12%;
-      width:420px;
-      height:420px;
-      border-radius:50%;
-      background-image: url('jana-portrait-800.jpg');
-      background-size:cover;
-      background-position: center 0%; /* mehr Körper sichtbar */
-      box-shadow: 0 40px 120px rgba(2,6,23,0.45), inset 0 0 40px rgba(255,255,255,0.02);
-      opacity:0.78;           /* weniger transparent = deutlicher */
-      filter: saturate(0.98) brightness(0.98);
-      transform: translate3d(0,0,0);
-      z-index:0;
-      pointer-events:none;
-      will-change: transform, opacity;
-      transition: opacity .22s ease;
-      animation: floaty 6s ease-in-out infinite; /* schnellere, stärkere Bewegung */
+      background: linear-gradient(180deg,
+        #1f2225 0%,
+        #323639 25%,
+        #5f6a70 50%,
+        #d9dde0 80%,
+        #f2f4f5 100%);
+      background-attachment: fixed;
+      color:#072033;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      font-size:16px;
+      padding-bottom:48px;
+      position:relative;
+      overflow-x:hidden;
     }
 
-    /* reduce motion support */
-    @media (prefers-reduced-motion: reduce) {
-      .floating-avatar { animation: none; }
-    }
-
-    /* mobile adjustments */
     @media (max-width:720px){
-      .floating-avatar{
-        width:260px;
-        height:260px;
-        right:50%;
-        left:auto;
-        top:6%;
-        transform: translateX(50%);
-        opacity:0.48;
-        animation: none; /* Bewegung aus auf kleinen Geräten */
-      }
-    }
-    @media (max-width:420px){
-      .floating-avatar{ display:none; }
+      body{ background-attachment: scroll; }
     }
 
+    .floating-avatar{
+      position:fixed; right:6%; top:12%;
+      width:420px; height:420px; border-radius:50%;
+      background-image: url('jana-portrait-800.jpg'); background-size:cover; background-position: center 0%;
+      box-shadow: 0 40px 120px rgba(2,6,23,0.45), inset 0 0 40px rgba(255,255,255,0.02);
+      opacity:0.78; filter: saturate(0.98) brightness(0.98);
+      transform: translate3d(0,0,0); z-index:0; pointer-events:none;
+      will-change: transform, opacity; transition: opacity .22s ease;
+      animation: floaty 6s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) { .floating-avatar { animation: none; } }
+    @media (max-width:720px){
+      .floating-avatar{ width:260px; height:260px; right:50%; left:auto; top:6%; transform: translateX(50%); opacity:0.48; animation: none; }
+    }
+    @media (max-width:420px){ .floating-avatar{ display:none; } }
     @keyframes floaty{
       0%   { transform: translate3d(0, -22px, 0); }
       25%  { transform: translate3d(22px, -6px, 0); }
@@ -98,20 +65,18 @@
     a{color:var(--accent); text-decoration:none}
     .wrap{max-width:var(--max-width); margin:0 auto; padding:20px; position:relative; z-index:2;}
 
-    /* Hero: transparent so background avatar is visible */
     .hero{position:relative; min-height:62vh; display:flex; align-items:center; justify-content:center; overflow:hidden; border-bottom:none; background:transparent;}
-    .hero-media{ display:none; }
     .hero::after{ content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00)); z-index:1; pointer-events:none; }
 
     .hero-inner{position:relative; z-index:2; width:100%; max-width:var(--max-width); padding:48px 28px; display:flex; gap:22px; align-items:center;}
-    .hero-card{background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border:1px solid var(--glass-border); padding:28px; border-radius:var(--radius); backdrop-filte[...]
+    .hero-card{background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border:1px solid var(--glass-border); padding:28px; border-radius:var(--radius);}
     .hero-title{margin:0; font-size:clamp(20px,3.6vw,34px); line-height:1.05; letter-spacing:-0.01em; font-weight:700; color:#031f2f;}
     .hero-sub{margin:0; color:var(--muted); font-weight:600;}
     .tagline{margin-top:12px; color: #08324a; font-size:clamp(14px,2.4vw,17px); max-width:70ch;}
     .cta-group{margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;}
     .btn{display:inline-flex; gap:10px; align-items:center; padding:10px 16px; border-radius:10px; font-weight:600; transition:transform .16s ease, box-shadow .16s ease; text-decoration:none;}
-    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff; box-shadow: 0 10px 30px rgba(43,123,222,0.18);}    
-    .btn.ghost{background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.06);}    
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff;}
+    .btn.ghost{background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.06);}
     .btn:hover{ transform:translateY(-3px); }
 
     main{margin-top:-40px; padding:0 20px; background:transparent}
@@ -124,163 +89,17 @@
     ul.skills li{background:rgba(255,255,255,0.06); padding:8px 10px; border-radius:8px; border:1px solid rgba(255,255,255,0.02); font-weight:600; color:#08324a; font-size:14px;}
     .muted{ color:#0b3b53; font-size:14px } .meta{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; color:var(--muted) }
     .dashboard-grid{display:grid; gap:14px; grid-template-columns: 1fr;} @media(min-width:720px){ .dashboard-grid{ grid-template-columns: repeat(2, 1fr) } }
-    .embed-placeholder{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); border-radius:10px; height:260px; display:flex; align-items:center; justify-content:cent[...]
-    .embed-iframe{width:100%; height:360px; border:0; border-radius:10px; box-shadow: 0 8px 30px rgba(2,6,23,0.25);}    
     footer.site-footer{margin-top:22px; text-align:center; color:var(--muted); font-size:14px; padding:22px 8px; background:transparent}
     .reveal{ opacity:0; transform:translateY(8px); transition:opacity .7s ease, transform .7s ease; will-change:opacity, transform;} .reveal.visible{ opacity:1; transform:none; }
     a:focus, button:focus { outline:2px solid rgba(99,150,255,0.4); outline-offset:3px; border-radius:8px; }
-    /* --- Kopierfertiger CSS‑Block — setze überall weiße Schrift und Überschriften in #b9d3ee --- / :root{ / falls du Variablen verwendest, kannst du hier ggf. anpassen */ --heading-color[...]
- 
-body { /* Textfarbe global auf weiß */ color: var(--text-color); }
 
-/* Überschriften überall in hellblau‑grau */ h1, h2, h3, h4, h5, h6 { color: var(--heading-color) !important; }
-
-/* Paragraphen, Listen, kleine Meta‑Texte */ p, li, .muted, .meta, .tagline { color: var(--text-color) !important; }
-
-/* Buttons / Links: falls Links zu stark verblassen, stell sicher dass sie ausreichend Kontrast haben */ a, .btn { color: #ffffff; }
-
-/* Falls einzelne Komponenten explizit andere Farben setzen, diese Regeln priorisieren / .card, .hero-card, .panel { / Falls du möchtest, kannst du hier card‑Text explizit auf weiß setzen */ [...]
-
-/* Bei Bedarf: Skills‑Pills lesbar machen (weiß auf dunklem Hintergrund) / ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255,0.06); / Beibehalten, oder anpassen [...]
- 
-/* Optional: Link‑Hover für bessere Sichtbarkeit */ a:hover { text-decoration:underline; color: #eaf4ff; }
-    /* === Einheitliche Buttons, Headings & Laufbahn-Fix === */
-
-/* Farben / Variablen */
-:root{
-  --heading-color: #b9d3ee;   /* hellblau‑grau für Überschriften */
-  --text-color: #ffffff;      /* weißer Fließtext */
-  --btn-start:   #b9d3ee;     /* Button gradient start */
-  --btn-end:     #eaf4ff;     /* Button gradient end (subtil) */
-  --btn-text:    #072033;     /* dunkler Text auf hellem Button für Kontrast */
-}
-
-/* Überschriften überall */
-h1,h2,h3,h4,h5,h6 {
-  color: var(--heading-color) !important;
-}
-
-/* Fließtext / Karten / Hero */
-body, p, li, .muted, .meta, .tagline, .card, .hero-card {
-  color: var(--text-color) !important;
-}
-
-/* Hero: Titel / Text gezielt */
-.hero-title { color: var(--heading-color) !important; }
-.hero-card, .hero-card * { color: var(--text-color) !important; }
-
-/* Laufbahn: inline-styles zuverlässig überschreiben */
-#laufbahn, #laufbahn * { color: var(--text-color) !important; }
-#laufbahn ol, #laufbahn ol li { color: var(--text-color) !important; }
-
-/* Einheitliche Primary‑Buttons (leichter Verlauf in #b9d3ee) */
-.btn.primary,
-.hero .btn.primary,
-#contact .btn.primary,
-.cta-group .btn.primary {
-  background: linear-gradient(90deg, var(--btn-start), var(--btn-end)) !important;
-  color: var(--btn-text) !important;
-  font-weight: 700;
-  border: 0 !important;
-  padding: 10px 16px !important;
-  border-radius: 10px !important;
-  min-width: 120px;
-  box-shadow: 0 8px 26px rgba(2,8,20,0.12);
-  transition: transform .16s ease, filter .12s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Hover/Focus für Primary */
-.btn.primary:hover,
-.btn.primary:focus {
-  transform: translateY(-3px);
-  filter: brightness(0.98);
-  outline: none;
-}
-
-/* Ghost / Secondary Buttons einheitlich */
-.btn.ghost,
-.cta-group .btn.ghost,
-#contact .btn.ghost {
-  background: transparent !important;
-  color: var(--text-color) !important;
-  border: 1px solid rgba(255,255,255,0.10) !important;
-  padding: 10px 16px !important;
-  border-radius: 10px !important;
-  min-width: 120px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Sicherstellen, dass alle CTA-Gruppen-Buttons identisch aussehen */
-.cta-group .btn, #contact .btn, footer .btn {
-  box-sizing: border-box;
-  text-align: center;
-}
-
-/* Skills‑Pills lesbar halten */
-ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255,0.06); }
-
+    /* Farben / Variablen */
+    :root{
+      --heading-color: #b9d3ee;
+      --text-color: #ffffff;
+    }
   </style>
 </head>
- <!-- Power BI Lightbox Modal (insert once before </body>) -->
-<div id="pb-modal" role="dialog" aria-hidden="true" aria-label="Power BI Vorschau" style="display:none; position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rg[...]
-  <div style="max-width:1100px;width:94%;max-height:88vh;border-radius:10px;overflow:auto;background:#fff;padding:12px;box-shadow:0 20px 60px rgba(2,6,23,0.5);position:relative;">
-    <button id="pb-modal-close" aria-label="Schließen" style="position:absolute;right:8px;top:8px;background:#fff;border:1px solid #ddd;border-radius:6px;padding:6px 8px;cursor:pointer;">✕</bu[...]
-    <img id="pb-modal-img" src="" alt="Große Vorschau Power BI Dashboard" style="width:100%;height:auto;border-radius:6px;display:block;" />
-    <div style="margin-top:8px;display:flex;gap:8px;align-items:center;justify-content:flex-end;">
-      <a id="pb-modal-open-link" href="#" target="_blank" rel="noopener" style="background:#0b66c3;color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600;display:inlin[...]
-    </div>
-  </div>
-</div> 
-  <script>
-  (function(){
-    const thumbBtns = document.querySelectorAll('.pb-thumb-btn');
-    const modal = document.getElementById('pb-modal');
-    const modalImg = document.getElementById('pb-modal-img');
-    const closeBtn = document.getElementById('pb-modal-close');
-    const openLink = document.getElementById('pb-modal-open-link');
-    let lastFocused = null;
-
-    function openModal(imgSrc, linkHref, triggerEl){
-      modalImg.src = imgSrc;
-      modalImg.alt = 'Große Vorschau';
-      openLink.href = linkHref || '#';
-      modal.style.display = 'flex';
-      modal.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-      lastFocused = triggerEl;
-      closeBtn.focus();
-    }
-
-    function closeModal(){
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden','true');
-      document.body.style.overflow = '';
-      modalImg.src = '';
-      if(lastFocused) lastFocused.focus();
-    }
-
-    thumbBtns.forEach(btn=>{
-      btn.addEventListener('click', function(){
-        const img = this.dataset.img;
-        const link = this.dataset.link;
-        openModal(img, link, this);
-      });
-    });
-
-    closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', function(e){
-      if(e.target === modal) closeModal();
-    });
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape' && modal.style.display === 'flex') closeModal();
-    });
-  })();
-</script>
 <body>
   <!-- Floating circular avatar in background -->
   <div class="floating-avatar" aria-hidden="true"></div>
@@ -298,10 +117,10 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
         <p class="tagline">Ich verbinde Betriebswirtschaft mit datengetriebenen Lösungen — effizient, belastbar und mit dem Blick fürs Wesentliche.</p>
 
         <div class="cta-group" role="navigation" aria-label="Call to actions">
-  <a class="btn primary" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio" title="E-Mail schreiben">Kontakt</a>
-  <a class="btn ghost" href="Lebenslauf.pdf" download title="CV herunterladen">CV herunterladen</a>
-  <a class="btn ghost" href="#portfolio" title="Portfolio / Dashboards">Portfolio</a>
-</div>
+          <a class="btn primary" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio" title="E-Mail schreiben">Kontakt</a>
+          <a class="btn ghost" href="Lebenslauf.pdf" download title="CV herunterladen">CV herunterladen</a>
+          <a class="btn ghost" href="#portfolio" title="Portfolio / Dashboards">Portfolio</a>
+        </div>
 
         <div style="margin-top:12px" class="muted">E‑mail • Instagram • Handy</div>
       </div>
@@ -313,8 +132,8 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
       <section class="row columns-2 reveal" id="about" aria-labelledby="about-heading">
         <div class="card" role="article" aria-labelledby="about-heading">
           <h2 id="about-heading">Über mich</h2>
-          <p>Ich bin Betriebswirtin mit großer Leidenschaft für Digitalisierung, KI und datengestützte Entscheidungen. Wenn moderne Tools Prozesse vereinfachen, Entscheidungen verbessern oder [...]
- 
+          <p>Ich bin Betriebswirtin mit großer Leidenschaft für Digitalisierung, KI und datengestützte Entscheidungen. Wenn moderne Tools Prozesse vereinfachen, Entscheidungen verbessern oder Teams entlasten — da bin ich dabei.</p>
+
           <h3 style="margin-top:14px; margin-bottom:8px; color:var(--muted); font-size:14px">Kern</h3>
           <ul>
             <li>Controlling, Reporting & KPI-Analysen</li>
@@ -332,10 +151,10 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
           <div style="margin-top:14px">
             <h3 style="margin:0 0 8px 0; font-size:14px">Kontakt</h3>
             <div class="meta">
-  <div><strong>Email:</strong> <a href="mailto:j_rommel@outlook.com">j_rommel@outlook.com</a></div>
-  <div><strong>Tel:</strong> <a href="tel:+4917632423319">+49 176 32423319</a></div>
-  <div><strong>Instagram:</strong> <a href="https://instagram.com/wnh.jn" target="_blank" rel="noopener">@wnh.jn</a></div>
-</div>
+              <div><strong>Email:</strong> <a href="mailto:j_rommel@outlook.com">j_rommel@outlook.com</a></div>
+              <div><strong>Tel:</strong> <a href="tel:+4917632423319">+49 176 32423319</a></div>
+              <div><strong>Instagram:</strong> <a href="https://instagram.com/wnh.jn" target="_blank" rel="noopener">@wnh.jn</a></div>
+            </div>
           </div>
 
           <div style="margin-top:14px">
@@ -350,56 +169,40 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
       <section id="portfolio" class="card reveal" aria-labelledby="portfolio-heading">
         <h2 id="portfolio-heading">Portfolio — Ausgewählte Projekte & Dashboards</h2>
         <div class="dashboard-grid" style="margin-top:12px">
-          <!-- Portrait Card: öffnet in neuem Tab -->
-<article class="card" style="padding:14px;">
-  <h3 style="margin:0 0 8px 0">Portrait — Jana Wünsch</h3>
 
-  <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/jana-portrait-800.jpg" target="_blank" rel="noopener" aria-label="Portrait in neuem Tab öffnen">
-    <img
-      src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/jana-portrait-800.jpg"
-      alt="Portrait von Jana Wünsch"
-      style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
-    />
-  </a>
+          <!-- Portrait Card -->
+          <article class="card" style="padding:14px;">
+            <h3 style="margin:0 0 8px 0">Portrait — Jana Wünsch</h3>
 
-  <p class="muted" style="margin-top:8px">
-    Klicken zum Vergrößern (öffnet in neuem Tab).
-  </p>
-</article>
+            <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/jana-portrait-800.jpg" target="_blank" rel="noopener" aria-label="Portrait in neuem Tab öffnen">
+              <img src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/jana-portrait-800.jpg" alt="Portrait von Jana Wünsch" style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);" />
+            </a>
 
-          <!-- Impact vs Effort Card: öffnet in neuem Tab -->
-<article class="card" style="padding:14px;">
-  <h3 style="margin:0 0 8px 0">Impact vs. Effort — Analyse</h3>
+            <p class="muted" style="margin-top:8px">Klicken zum Vergrößern (öffnet in neuem Tab).</p>
+          </article>
 
-  <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png" target="_blank" rel="noopener" aria-label="Impact vs Effort Bild in neuem Tab öffnen">
-    <img
-      src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png"
-      alt="Impact vs Effort Visual"
-      style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
-    />
-  </a>
+          <!-- Impact vs Effort Card -->
+          <article class="card" style="padding:14px;">
+            <h3 style="margin:0 0 8px 0">Impact vs. Effort — Analyse</h3>
 
-  <p class="muted" style="margin-top:8px">
-    Klicken zum Vergrößern (öffnet in neuem Tab).
-  </p>
-</article>
+            <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png" target="_blank" rel="noopener" aria-label="Impact vs Effort Bild in neuem Tab öffnen">
+              <img src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png" alt="Impact vs Effort Visual" style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);" />
+            </a>
 
-          <!-- Interessen Card: öffnet in neuem Tab -->
-<article class="card" style="padding:14px;">
-  <h3 style="margin:0 0 8px 0">Interessen</h3>
+            <p class="muted" style="margin-top:8px">Klicken zum Vergrößern (öffnet in neuem Tab).</p>
+          </article>
 
-  <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png" target="_blank" rel="noopener" aria-label="Interessen Bild in neuem Tab öffnen">
-    <img
-      src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png"
-      alt="Interessen Visual"
-      style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
-    />
-  </a>
+          <!-- Interessen Card -->
+          <article class="card" style="padding:14px;">
+            <h3 style="margin:0 0 8px 0">Interessen</h3>
 
-  <p class="muted" style="margin-top:8px">
-    Klicken zum Vergrößern (öffnet in neuem Tab).
-  </p>
-</article>
+            <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png" target="_blank" rel="noopener" aria-label="Interessen Bild in neuem Tab öffnen">
+              <img src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png" alt="Interessen Visual" style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);" />
+            </a>
+
+            <p class="muted" style="margin-top:8px">Klicken zum Vergrößern (öffnet in neuem Tab).</p>
+          </article>
+
         </div>
 
         <p style="margin-top:12px" class="muted">Wenn du Links, Bilder oder Embed‑URLs für die Projekte hast, füge ich sie direkt in die Karten ein.</p>
@@ -426,9 +229,9 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
         <p>Am schnellsten erreichbar per E‑Mail oder Telefon. Für Bewerbungen: CV herunterladen & direkt mitschicken.</p>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px">
-  <a class="btn primary" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio">E‑Mail schreiben</a>
-  <a class="btn ghost" href="Lebenslauf.pdf" download>CV herunterladen</a>
-</div>
+          <a class="btn primary" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio">E‑Mail schreiben</a>
+          <a class="btn ghost" href="Lebenslauf.pdf" download>CV herunterladen</a>
+        </div>
 
         <p class="muted" style="margin-top:12px">Hinweis: Diese Seite ist für Bewerbungszwecke und LinkedIn‑Sharing gedacht.</p>
       </section>
@@ -442,6 +245,64 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
     </div>
   </footer>
 
+  <!-- Power BI Lightbox Modal (inside body to ensure valid HTML) -->
+  <div id="pb-modal" role="dialog" aria-hidden="true" aria-label="Power BI Vorschau" style="display:none; position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);">
+    <div style="max-width:1100px;width:94%;max-height:88vh;border-radius:10px;overflow:auto;background:#fff;padding:12px;box-shadow:0 20px 60px rgba(2,6,23,0.5);position:relative;">
+      <button id="pb-modal-close" aria-label="Schließen" style="position:absolute;right:8px;top:8px;background:#fff;border:1px solid #ddd;border-radius:6px;padding:6px 8px;cursor:pointer;">✕</button>
+      <img id="pb-modal-img" src="" alt="Große Vorschau Power BI Dashboard" style="width:100%;height:auto;border-radius:6px;display:block;" />
+      <div style="margin-top:8px;display:flex;gap:8px;align-items:center;justify-content:flex-end;">
+        <a id="pb-modal-open-link" href="#" target="_blank" rel="noopener" style="background:#0b66c3;color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Im neuen Tab öffnen</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal initialization script (after DOM elements) -->
+  <script>
+    (function(){
+      const thumbBtns = document.querySelectorAll('.pb-thumb-btn');
+      const modal = document.getElementById('pb-modal');
+      const modalImg = document.getElementById('pb-modal-img');
+      const closeBtn = document.getElementById('pb-modal-close');
+      const openLink = document.getElementById('pb-modal-open-link');
+      let lastFocused = null;
+
+      function openModal(imgSrc, linkHref, triggerEl){
+        modalImg.src = imgSrc;
+        modalImg.alt = 'Große Vorschau';
+        openLink.href = linkHref || '#';
+        modal.style.display = 'flex';
+        modal.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+        lastFocused = triggerEl;
+        closeBtn.focus();
+      }
+
+      function closeModal(){
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+        modalImg.src = '';
+        if(lastFocused) lastFocused.focus();
+      }
+
+      thumbBtns.forEach(btn=>{
+        btn.addEventListener('click', function(){
+          const img = this.dataset.img;
+          const link = this.dataset.link;
+          openModal(img, link, this);
+        });
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', function(e){
+        if(e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+      });
+    })();
+  </script>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -450,17 +311,15 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
       const avatar = document.querySelector('.floating-avatar');
       if(!avatar) return;
       const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(prefersReduced) return; // no motion
+      if(prefersReduced) return;
 
-      // on mouse move, translate avatar a tiny amount
       function onMove(e){
         const vw = window.innerWidth;
         const vh = window.innerHeight;
-        const cx = e.clientX / vw - 0.5; // -0.5 .. 0.5
+        const cx = e.clientX / vw - 0.5;
         const cy = e.clientY / vh - 0.5;
-        const tx = cx * 40; // increased parallax strength
-        const ty = cy * 30; // increased parallax strength
-        // combine with base floaty animation using translate3d
+        const tx = cx * 40;
+        const ty = cy * 30;
         avatar.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
       }
 
@@ -474,10 +333,9 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
         if(!active) return;
         active = false;
         window.removeEventListener('mousemove', onMove);
-        avatar.style.transform = ''; // reset
+        avatar.style.transform = '';
       }
 
-      // enable on large screens
       function check(){
         if(window.innerWidth > 720) enable();
         else disable();
@@ -486,13 +344,13 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
       window.addEventListener('resize', check);
     })();
 
-    // reveal animations observer (unchanged)
+    // reveal animations observer
     (function(){
       const obs = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }); }, {threshold:0.12});
       document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     })();
 
-    // smooth hash links (unchanged)
+    // smooth hash links
     (function(){
       document.querySelectorAll('a[href^="#"]').forEach(a=>{ a.addEventListener('click', function(e){
         const target = document.querySelector(this.getAttribute('href'));
