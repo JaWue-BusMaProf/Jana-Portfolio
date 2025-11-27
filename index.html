@@ -317,6 +317,33 @@ header.hero .hero-inner .hero-card .hero-sub,
     background-size: 100% 100vh !important; /* dehnt den Gradient über die Viewporthöhe - kein Kacheln */
     background-attachment: scroll !important;
   }
+
+}
+    /* Mobile: Avatar über der Hero-Card anzeigen + Hero-Card etwas tiefer starten */
+@media (max-width:720px) {
+  /* Avatar sichtbarer und oberhalb der Card */
+  .floating-avatar {
+    z-index: 6 !important;        /* über der Card platzieren */
+    opacity: 0.36 !important;     /* anpassen nach Geschmack */
+    right: 50% !important;
+    transform: translateX(40%) !important;
+  }
+
+  /* Erlaube, dass das Avatar nicht abgeschnitten wird */
+  .hero {
+    overflow: visible !important;
+  }
+
+  /* Hero-Card weiter nach unten schieben, damit das Avatar frei darüber schwebt */
+  .hero-inner {
+    padding-top: 92px !important; /* Wert anpassen: größer = Card weiter unten */
+  }
+
+  /* Stelle sicher, dass die Card selbst unter dem Avatar bleibt */
+  .hero-card {
+    position: relative !important;
+    z-index: 4 !important; /* < .floating-avatar, > Hintergrund */
+  }
 }
   </style>
 </head>
