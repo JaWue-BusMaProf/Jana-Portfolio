@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Jana Wünsch — Business Master Professional</title>
+  <title>Jana Wünsch — Master Professional in Business Management </title>
   <meta name="description" content="Jana Wünsch — Betriebswirtin, Digitalisierung & Data Enthusiast. Portfolio, Skills und Kontakt für Recruiter." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -169,9 +169,7 @@ body, p, li, .muted, .meta, .tagline, .card, .hero-card {
 .hero-title { color: var(--heading-color) !important; }
 .hero-card, .hero-card * { color: var(--text-color) !important; }
 
-/* Laufbahn: inline-styles zuverlässig überschreiben */
-#laufbahn, #laufbahn * { color: var(--text-color) !important; }
-#laufbahn ol, #laufbahn ol li { color: var(--text-color) !important; }
+
 
 /* Einheitliche Primary‑Buttons (leichter Verlauf in #b9d3ee) */
 .btn.primary,
@@ -223,7 +221,34 @@ body, p, li, .muted, .meta, .tagline, .card, .hero-card {
 
 /* Skills‑Pills lesbar halten */
 ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255,0.06); }
+/* --- Laufbahn: gezielte Farben statt globalem Override --- */
+/* Listen in Laufbahn weiterhin weißen Fließtext behalten */
+#laufbahn ol,
+#laufbahn ol li {
+  color: var(--text-color) !important;
+}
 
+/* Überschriften in Laufbahn in der gleichen Farbe wie andere Headlines */
+#laufbahn h2,
+#laufbahn h2#laufbahn-heading,
+#laufbahn-heading {
+  color: var(--heading-color) !important;
+  font-weight: 600;
+}
+
+/* Hero-Subtitle ebenfalls auf heading-color setzen */
+.hero-sub {
+  color: var(--heading-color) !important;
+  font-weight: 600;
+}
+    /* FORCED: Laufbahn-Überschrift + Hero-Subtitle in heading-color */
+header.hero .hero-inner .hero-card .hero-sub,
+#laufbahn > h2#laufbahn-heading,
+#laufbahn h2#laufbahn-heading,
+#laufbahn-heading {
+  color: var(--heading-color) !important;
+  font-weight: 600 !important;
+}
   </style>
 </head>
  <!-- Power BI Lightbox Modal (insert once before </body>) -->
@@ -291,19 +316,17 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
         <div class="hero-top">
           <div>
             <h1 id="hero-heading" class="hero-title">Jana Wünsch</h1>
-            <p class="hero-sub">Business Master Professional — Digitalisierung • Data • Prozesse</p>
+            <p class="hero-sub accent">Business Master Professional — Digitalisierung • Data • Prozesse</p>
           </div>
         </div>
 
-        <p class="tagline">Ich verbinde Betriebswirtschaft mit datengetriebenen Lösungen — effizient, belastbar und mit dem Blick fürs Wesentliche.</p>
+        <p class="tagline">Diese Seite ist ein eigenes Projekt: umgesetzt ohne Programmierkenntnisse, mit Copilot & selbst erlernten HTML-Basics. Learning-Mindset trifft Business-Expertise.</p>
 
         <div class="cta-group" role="navigation" aria-label="Call to actions">
   <a class="btn primary" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio" title="E-Mail schreiben">Kontakt</a>
   <a class="btn ghost" href="Lebenslauf.pdf" download title="CV herunterladen">CV herunterladen</a>
   <a class="btn ghost" href="#portfolio" title="Portfolio / Dashboards">Portfolio</a>
 </div>
-
-        <div style="margin-top:12px" class="muted">E‑mail • Instagram • Handy</div>
       </div>
     </div>
   </header>
@@ -318,16 +341,18 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
           <h3 style="margin-top:14px; margin-bottom:8px; color:var(--muted); font-size:14px">Kern</h3>
           <ul>
             <li>Controlling, Reporting & KPI-Analysen</li>
-            <li>Microsoft Excel (Pivot, SVERWEIS, Power Query)</li>
+            <li>Microsoft Excel (Pivot, SVERWEIS)</li>
             <li>Microsoft 365 Copilot & Power BI (aktuelle Weiterbildung)</li>
             <li>Analytisches Denken, Prozessoptimierung, Teamarbeit</li>
+            <li>KI Management</li>
           </ul>
         </div>
 
         <aside class="card" role="complementary" aria-labelledby="profile-heading">
           <h2 id="profile-heading">Kurzprofil</h2>
-          <p class="muted">Jobtitel</p>
-          <p style="margin-top:8px; font-weight:600">Business Master Professional</p>
+          <div style="margin-top:14px">
+            <h3 style="margin:0 0 8px 0; font-size:14px">Jobtitel</h3>
+          <p style="margin-top:8px; font-weight:600">Master Professional in Business Management</p>
 
           <div style="margin-top:14px">
             <h3 style="margin:0 0 8px 0; font-size:14px">Kontakt</h3>
@@ -341,79 +366,98 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
           <div style="margin-top:14px">
             <h3 style="margin:0 0 8px 0; font-size:14px">Skills</h3>
             <ul class="skills" aria-label="Liste der Fähigkeiten">
-              <li>Reporting</li><li>Excel</li><li>Power BI</li><li>SQL (Grundlagen)</li><li>Prozessoptimierung</li>
+              <li>Reporting</li><li>Excel</li><li>Power BI</li><li>AI-Tooling & Prompting</li><li>Prozessoptimierung</li><li>AI-Tooling & Prompting</li>
             </ul>
           </div>
         </aside>
       </section>
 
       <section id="portfolio" class="card reveal" aria-labelledby="portfolio-heading">
-        <h2 id="portfolio-heading">Portfolio — Ausgewählte Projekte & Dashboards</h2>
+        <h2 id="portfolio-heading">Portfolio — Skills, ausgewählte eigene Projekte & Privat</h2>
         <div class="dashboard-grid" style="margin-top:12px">
-          <!-- Power BI Card: Thumbnail (uses image in repo root: screen_hard_soft.png) -->
-<article class="card" style="padding:14px;">
-  <h3 style="margin:0 0 8px 0">Power BI — Sales Dashboard</h3>
 
-  <!-- button holds data attributes for modal: data-img = filename in repo root, data-link = optional report link -->
-  <button class="pb-thumb-btn" type="button" data-img="screen_hard_soft.png" data-link="#" aria-label="Vorschau öffnen" style="border:0;background:transparent;padding:0;cursor:pointer;">
-    <img
-      src="screen_hard_soft.png"
-      alt="Screenshot des Power BI Sales Dashboard"
-      style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
-    />
-  </button>
+  <!-- vorhandene Karte: Power BI — Screenshot (screen_hard_soft) -->
+  <article class="card" style="padding:14px;">
+    <h3 style="margin:0 0 8px 0">Hard- & Softskills</h3>
 
-  <p class="muted" style="margin-top:8px">
-    Interaktive Vorschau (Screenshot). Wenn du später einen Link zum Power BI Service hast, setze data-link auf die Report‑URL (öffnet im Modal).
-  </p>
-</article>
+    <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png" target="_blank" rel="noopener" aria-label="Screenshot in neuem Tab öffnen">
+      <img
+        src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png"
+        alt="Screenshot des Power BI Sales Dashboard"
+        style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
+      />
+    </a>
 
-          <article class="card" style="padding:14px;">
-  <h3 style="margin:0 0 8px 0">Power BI — Sales Dashboard</h3>
+    <p class="muted" style="margin-top:8px">
+      Meine am stärksten ausgeprägten Fähigkeiten im Überblick.
+    </p>
+  </article>
 
-  <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png" target="_blank" rel="noopener" aria-label="Screenshot in neuem Tab öffnen">
-    <img
-      src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png"
-      alt="Screenshot des Power BI Sales Dashboard"
-      style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
-    />
-  </a>
+  <!-- neue Karte: Impact vs. Effort -->
+  <article class="card" style="padding:14px;">
+    <h3 style="margin:0 0 8px 0">Impact vs. Effort — Analyse</h3>
 
-  <p class="muted" style="margin-top:8px">
-    Screenshot (klicken zum Vergrößern). Wenn du später einen Live‑Report verlinken willst, ersetze die href‑URL durch den Report‑Link.
-  </p>
-</article>
-        </div>
+    <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png" target="_blank" rel="noopener" aria-label="Impact vs Effort Bild in neuem Tab öffnen">
+      <img
+        src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png"
+        alt="Impact vs Effort Visual"
+        style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
+      />
+    </a>
 
-        <p style="margin-top:12px" class="muted">Wenn du Links, Bilder oder Embed‑URLs für die Projekte hast, füge ich sie direkt in die Karten ein.</p>
+    <p class="muted" style="margin-top:8px">
+      Mit jedem Projekt wurden meine Ergebnisse stärker – und der nötige Aufwand geringer.
+    </p>
+  </article>
+
+  <!-- neue Karte: Interessen -->
+  <article class="card" style="padding:14px;">
+    <h3 style="margin:0 0 8px 0">Interessen</h3>
+
+    <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png" target="_blank" rel="noopener" aria-label="Interessen Bild in neuem Tab öffnen">
+      <img
+        src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png"
+        alt="Interessen Visual"
+        style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
+      />
+    </a>
+
+    <p class="muted" style="margin-top:8px">
+      Was mich inspiriert und im Gleichgewicht hält.
+    </p>
+  </article>
+
+</div>
+        
       </section>
 
       <section id="laufbahn" class="card reveal" aria-labelledby="laufbahn-heading">
-        <h2 id="laufbahn-heading">Laufbahn</h2>
+        <h2 id="laufbahn-heading" class="accent">Laufbahn</h2>
         <ol style="margin:0 0 0 18px; padding:0; color:var(--muted)">
-          <li style="margin-bottom:8px"><strong>2022–heute</strong> — Position / Unternehmen (Kurzbeschreibung)</li>
-          <li style="margin-bottom:8px"><strong>2019–2021</strong> — Frühere Rolle (Kurzbeschreibung)</li>
-          <li style="margin-bottom:8px"><strong>Abschluss</strong> — Master / Hochschule</li>
+          <li style="margin-bottom:8px"><strong>06/2025–heute</strong> — Weiterbildung zur KI-Managerin (IHK)</li>
+          <li style="margin-bottom:8px"><strong>2024</strong> — <em>Betriebswirtin</em></li>
+          <li style="margin-bottom:8px"><strong>10/2022–06/2025</strong> — Stellvertretende kaufmännische Leitung</li>
+          <li style="margin-bottom:8px"><strong>01/2019-10/2022</strong> — Kaufmännische Angestellte</li>
+          <li style="margin-bottom:8px"><strong>2018</strong> — <em>Handelsfachwirtin</em></li>
         </ol>
       </section>
 
       <section id="skills" class="card reveal" aria-labelledby="skills-heading">
         <h2 id="skills-heading">Skills & Tools</h2>
         <ul class="skills" aria-label="Liste der Fähigkeiten">
-          <li>Controlling</li><li>Reporting</li><li>Power BI</li><li>Excel (Power Query)</li><li>Microsoft 365 Copilot</li>
+          <li>Controlling</li><li>Reporting</li><li>Power BI</li><li>Excel (Power Query, Pivot, SVERWEIS)</li><li>Microsoft 365 Copilot</li><li>AI-Tooling & Prompting</li>
         </ul>
       </section>
 
       <section id="contact" class="card reveal" aria-labelledby="contact-heading">
         <h2 id="contact-heading">Kontakt</h2>
-        <p>Am schnellsten erreichbar per E‑Mail oder Telefon. Für Bewerbungen: CV herunterladen & direkt mitschicken.</p>
+        <p>Für Kooperationen, Ideen oder Fragen – am besten telefonisch erreichbar.</p>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px">
   <a class="btn primary" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio">E‑Mail schreiben</a>
   <a class="btn ghost" href="Lebenslauf.pdf" download>CV herunterladen</a>
 </div>
 
-        <p class="muted" style="margin-top:12px">Hinweis: Diese Seite ist für Bewerbungszwecke und LinkedIn‑Sharing gedacht.</p>
       </section>
 
     </div>
