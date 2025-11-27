@@ -381,6 +381,36 @@ header.hero .hero-inner .hero-card .hero-sub,
     z-index: 7 !important;           /* unter Avatar, über Hintergrund */
   }
 }
+    /* BG Splats - dezente türkise Farbkleckse (ans Ende des <style>-Blocks) */
+#bg-splats {
+  position: fixed;
+  inset: 0;
+  z-index: -5;            /* hinter avatar/hero-card */
+  pointer-events: none;
+  overflow: visible;
+}
+
+#bg-splats-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#splats circle {
+  will-change: transform, opacity;
+  opacity: 0;
+  filter: url(#splatBlur);
+}
+
+/* mobile tuning */
+@media (max-width:720px) {
+  #bg-splats { z-index: -6; }
+}
+
+/* reduced motion: hide */
+@media (prefers-reduced-motion: reduce) {
+  #bg-splats { display: none !important; }
+}
   </style>
 </head>
  <!-- Power BI Lightbox Modal (insert once before </body>) -->
@@ -439,6 +469,17 @@ header.hero .hero-inner .hero-card .hero-sub,
   })();
 </script>
 <body>
+  <!-- BG Splats: dezente türkise Farbklekse (einfügen in <body>, z.B. nach .floating-avatar) -->
+<div id="bg-splats" aria-hidden="true">
+  <svg id="bg-splats-svg" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" role="presentation">
+    <defs>
+      <filter id="splatBlur" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="28" />
+      </filter>
+    </defs>
+    <g id="splats" transform="translate(0,0)"></g>
+  </svg>
+</div>
   <!-- Floating circular avatar in background -->
   <div class="floating-avatar" aria-hidden="true"></div>
 
@@ -659,5 +700,72 @@ header.hero .hero-inner .hero-card .hero-sub,
       }); });
     })();
   </script>
+  <script>
+(function(){
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const svgNS = "http://www.w3.org/2000/svg";
+  const container = document.getElementById('splats');
+  const svg = document.getElementById('bg-splats-svg');
+  if(!container || !svg) return;
+
+  const maxSplats = 8;          // dezent: weniger Splats
+  const splats = [];
+  const baseColor = 'hsla(185,85%,50%,0.28)'; // dezentes Türkis (alpha niedriger)
+  const minR = 38, maxR = 96;   // splash sizes
+  const verticalRange = [ -0.08, 0.45 ]; // relative to viewBox height
+
+  for(let i=0;i<maxSplats;i++){
+    const c = document.createElementNS(svgNS,'circle');
+    const r = Math.round(minR + Math.random()*(maxR-minR));
+    c.setAttribute('r', r);
+    c.setAttribute('cx', Math.round(Math.random()*1000));
+    c.setAttribute('cy', Math.round((verticalRange[0] + Math.random()*(verticalRange[1]-verticalRange[0]))*600));
+    c.setAttribute('fill', baseColor);
+    c.style.opacity = 0;
+    container.appendChild(c);
+    splats.push({el:c, baseR:r, baseCx:parseFloat(c.getAttribute('cx')), baseCy:parseFloat(c.getAttribute('cy')), jitter: Math.random()});
+  }
+
+  function getProgress(){
+    const range = window.innerHeight * 2.0; // erste ~2 Viewports
+    return Math.min(1, Math.max(0, window.scrollY / range));
+  }
+
+  function update(){
+    const progress = getProgress();
+    const visible = Math.round(progress * maxSplats);
+    splats.forEach((s, i) => {
+      const el = s.el;
+      if(i < visible){
+        const localProg = Math.min(1, Math.max(0, (progress - (i/maxSplats)*0.08) / (1 - (i/maxSplats)*0.08)));
+        const scale = 0.9 + localProg * (1.25 + s.jitter*0.6);
+        el.setAttribute('r', (s.baseR * scale).toString());
+        const ty = s.baseCy + (localProg * 60 * (s.jitter - 0.5));
+        el.setAttribute('cy', ty);
+        el.style.opacity = 0.04 + localProg * 0.22; // sehr subtil
+      } else {
+        el.style.opacity = Math.max(0, el.style.opacity - 0.03);
+      }
+    });
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if(!ticking){ ticking = true; requestAnimationFrame(()=>{ update(); ticking=false; }); }
+  }, {passive:true});
+
+  update();
+  window.addEventListener('resize', () => {
+    splats.forEach(s => {
+      s.baseCx = Math.round(Math.random()*1000);
+      s.baseCy = Math.round((verticalRange[0] + Math.random()*(verticalRange[1]-verticalRange[0]))*600);
+      s.el.setAttribute('cx', s.baseCx);
+      s.el.setAttribute('cy', s.baseCy);
+      s.el.setAttribute('r', s.baseR);
+    });
+    update();
+  });
+})();
+</script>
 </body>
 </html>
