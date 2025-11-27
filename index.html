@@ -226,61 +226,6 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
 
   </style>
 </head>
- <!-- Power BI Lightbox Modal (insert once before </body>) -->
-<div id="pb-modal" role="dialog" aria-hidden="true" aria-label="Power BI Vorschau" style="display:none; position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);">
-  <div style="max-width:1100px;width:94%;max-height:88vh;border-radius:10px;overflow:auto;background:#fff;padding:12px;box-shadow:0 20px 60px rgba(2,6,23,0.5);position:relative;">
-    <button id="pb-modal-close" aria-label="Schließen" style="position:absolute;right:8px;top:8px;background:#fff;border:1px solid #ddd;border-radius:6px;padding:6px 8px;cursor:pointer;">✕</button>
-    <img id="pb-modal-img" src="" alt="Große Vorschau Power BI Dashboard" style="width:100%;height:auto;border-radius:6px;display:block;" />
-    <div style="margin-top:8px;display:flex;gap:8px;align-items:center;justify-content:flex-end;">
-      <a id="pb-modal-open-link" href="#" target="_blank" rel="noopener" style="background:#0b66c3;color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Interaktiven Report öffnen</a>
-    </div>
-  </div>
-</div> 
-  <script>
-  (function(){
-    const thumbBtns = document.querySelectorAll('.pb-thumb-btn');
-    const modal = document.getElementById('pb-modal');
-    const modalImg = document.getElementById('pb-modal-img');
-    const closeBtn = document.getElementById('pb-modal-close');
-    const openLink = document.getElementById('pb-modal-open-link');
-    let lastFocused = null;
-
-    function openModal(imgSrc, linkHref, triggerEl){
-      modalImg.src = imgSrc;
-      modalImg.alt = 'Große Vorschau';
-      openLink.href = linkHref || '#';
-      modal.style.display = 'flex';
-      modal.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-      lastFocused = triggerEl;
-      closeBtn.focus();
-    }
-
-    function closeModal(){
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden','true');
-      document.body.style.overflow = '';
-      modalImg.src = '';
-      if(lastFocused) lastFocused.focus();
-    }
-
-    thumbBtns.forEach(btn=>{
-      btn.addEventListener('click', function(){
-        const img = this.dataset.img;
-        const link = this.dataset.link;
-        openModal(img, link, this);
-      });
-    });
-
-    closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', function(e){
-      if(e.target === modal) closeModal();
-    });
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape' && modal.style.display === 'flex') closeModal();
-    });
-  })();
-</script>
 <body>
   <!-- Floating circular avatar in background -->
   <div class="floating-avatar" aria-hidden="true"></div>
@@ -482,6 +427,63 @@ ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255
         if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); history.replaceState(null, '', this.getAttribute('href')); }
       }); });
     })();
+  </script>
+
+  <!-- Power BI Lightbox Modal -->
+  <div id="pb-modal" role="dialog" aria-hidden="true" aria-label="Power BI Vorschau" style="display:none; position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);">
+    <div style="max-width:1100px;width:94%;max-height:88vh;border-radius:10px;overflow:auto;background:#fff;padding:12px;box-shadow:0 20px 60px rgba(2,6,23,0.5);position:relative;">
+      <button id="pb-modal-close" aria-label="Schließen" style="position:absolute;right:8px;top:8px;background:#fff;border:1px solid #ddd;border-radius:6px;padding:6px 8px;cursor:pointer;">✕</button>
+      <img id="pb-modal-img" src="" alt="Große Vorschau Power BI Dashboard" style="width:100%;height:auto;border-radius:6px;display:block;" />
+      <div style="margin-top:8px;display:flex;gap:8px;align-items:center;justify-content:flex-end;">
+        <a id="pb-modal-open-link" href="#" target="_blank" rel="noopener" style="background:#0b66c3;color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Interaktiven Report öffnen</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    const thumbBtns = document.querySelectorAll('.pb-thumb-btn');
+    const modal = document.getElementById('pb-modal');
+    const modalImg = document.getElementById('pb-modal-img');
+    const closeBtn = document.getElementById('pb-modal-close');
+    const openLink = document.getElementById('pb-modal-open-link');
+    let lastFocused = null;
+
+    function openModal(imgSrc, linkHref, triggerEl){
+      modalImg.src = imgSrc;
+      modalImg.alt = 'Große Vorschau';
+      openLink.href = linkHref || '#';
+      modal.style.display = 'flex';
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      lastFocused = triggerEl;
+      closeBtn.focus();
+    }
+
+    function closeModal(){
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+      modalImg.src = '';
+      if(lastFocused) lastFocused.focus();
+    }
+
+    thumbBtns.forEach(btn=>{
+      btn.addEventListener('click', function(){
+        const img = this.dataset.img;
+        const link = this.dataset.link;
+        openModal(img, link, this);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e){
+      if(e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+    });
+  })();
   </script>
 </body>
 </html>
