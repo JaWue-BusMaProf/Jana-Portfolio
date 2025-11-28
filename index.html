@@ -399,19 +399,26 @@ header.hero .hero-inner .hero-card .hero-sub,
 #splats circle,
 #splats ellipse {
   will-change: transform, opacity;
-  /* sichtbar per Default: kein komplettes Ausblenden mehr */
-  opacity: 0.18;
-  transition: opacity .36s ease, transform .46s ease;
+  /* stärkere Grundsichtbarkeit */
+  opacity: 0.60;
+  transform-origin: center center;
+  /* kein CSS transform-transition — JS übernimmt das smoothing */
   filter: url(#splatBlur);
+  pointer-events: none;
 }
 
-/* mobile tuning: reduced blur for better visibility and performance */
+/* leichte Sättigung & Kontrast für das SVG-Overlay */
+#bg-splats-svg {
+  filter: saturate(1.18) contrast(1.04);
+}
+
+/* mobile tuning: etwas weniger stark auf kleinen Geräten */
 @media (max-width:720px) {
   #bg-splats { z-index: -6; }
   #splats circle,
   #splats ellipse {
     filter: url(#splatBlurMobile);
-    opacity: 0.14;
+    opacity: 0.48;
   }
 }
 
@@ -488,15 +495,15 @@ header.hero .hero-inner .hero-card .hero-sub,
         <feGaussianBlur stdDeviation="8" />
       </filter>
     </defs>
-   <g id="splats" transform="translate(0,0)">
-  <!-- Feste, immer gleiche türkise Kleckse (Positionen und Größen sind konstant) -->
-  <ellipse rx="140" ry="80" cx="860" cy="60" fill="hsla(185,85%,48%,0.52)"/>
-  <circle r="120" cx="120" cy="170" fill="hsla(183,78%,46%,0.44)"/>
-  <ellipse rx="90" ry="48" cx="720" cy="300" fill="hsla(185,85%,48%,0.36)"/>
-  <circle r="72" cx="420" cy="80" fill="hsla(178,70%,50%,0.28)"/>
-  <ellipse rx="110" ry="62" cx="220" cy="360" fill="hsla(186,82%,46%,0.30)"/>
-  <circle r="56" cx="640" cy="470" fill="hsla(180,75%,48%,0.24)"/>
-  <ellipse rx="80" ry="46" cx="940" cy="420" fill="hsla(188,80%,46%,0.20)"/>
+<g id="splats" transform="translate(0,0)">
+  <!-- Kräftigere, feste türkise Kleckse (immer gleich) -->
+  <ellipse rx="140" ry="80" cx="860" cy="60"  fill="hsla(185,85%,48%,0.85)"/>
+  <circle  r="120" cx="120" cy="170" fill="hsla(183,78%,46%,0.78)"/>
+  <ellipse rx="90"  ry="48" cx="720" cy="300" fill="hsla(185,85%,48%,0.70)"/>
+  <circle  r="72"  cx="420" cy="80"  fill="hsla(178,70%,50%,0.56)"/>
+  <ellipse rx="110" ry="62" cx="220" cy="360" fill="hsla(186,82%,46%,0.52)"/>
+  <circle  r="56"  cx="640" cy="470" fill="hsla(180,75%,48%,0.44)"/>
+  <ellipse rx="80"  ry="46" cx="940" cy="420" fill="hsla(188,80%,46%,0.38)"/>
 </g>
   </svg>
 </div>
@@ -724,33 +731,74 @@ header.hero .hero-inner .hero-card .hero-sub,
 (function(){
   const container = document.getElementById('splats');
   if(!container) return;
-  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(prefersReduced) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const splatEls = Array.from(container.children);
+  // prepare elements & initial state
+  const splatEls = Array.from(container.children).map(el => {
+    el._state = { o: parseFloat(getComputedStyle(el).opacity) || 0, s: 1, y: 0 };
+    el._target = { ...el._state };
+    return el;
+  });
+
   function getProgress(){
     const range = window.innerHeight * 1.6;
     return Math.min(1, Math.max(0, window.scrollY / range));
   }
 
-  function update(){
+  // Set targets deterministically (no randomness)
+  function setTargets(){
     const p = getProgress();
     splatEls.forEach((el, i) => {
-      // gleichmäßige, deterministische Sichtbarkeit (kein Random)
       const offset = i * 0.06; // stagger
       const local = Math.min(1, Math.max(0, (p - offset) / (1 - offset)));
-      el.style.opacity = (0.08 + local * 0.6).toFixed(3);
-      el.style.transform = `scale(${1 + local * 0.55}) translateY(${local * 28}px)`;
+      el._target.o = 0.28 + local * 0.82;          // basis + amplitude
+      el._target.s = 1 + local * 1.1;              // scale target
+      el._target.y = local * 40;                   // translateY target
     });
+    startRaf();
   }
 
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if(!ticking){ ticking = true; requestAnimationFrame(()=>{ update(); ticking=false; }); }
-  }, {passive:true});
-  window.addEventListener('resize', update);
+  // Smoothing loop
+  let rafId = null;
+  function startRaf(){
+    if(rafId) return;
+    function step(){
+      let anyMoving = false;
+      // smoothing factor: 0..1 (smaller = smoother/slower)
+      const f = 0.14;
+      splatEls.forEach(el => {
+        const st = el._state;
+        const tg = el._target;
+        // simple lerp
+        st.o = st.o + (tg.o - st.o) * f;
+        st.s = st.s + (tg.s - st.s) * f;
+        st.y = st.y + (tg.y - st.y) * f;
 
-  update();
+        // apply
+        el.style.opacity = st.o.toFixed(3);
+        el.style.transform = `scale(${st.s}) translateY(${st.y}px)`;
+
+        // check if still moving
+        if(Math.abs(st.o - tg.o) > 0.002 || Math.abs(st.s - tg.s) > 0.002 || Math.abs(st.y - tg.y) > 0.5){
+          anyMoving = true;
+        }
+      });
+
+      if(anyMoving){
+        rafId = requestAnimationFrame(step);
+      } else {
+        rafId = null;
+      }
+    }
+    rafId = requestAnimationFrame(step);
+  }
+
+  // Events: on scroll/resize update targets
+  window.addEventListener('scroll', setTargets, { passive: true });
+  window.addEventListener('resize', setTargets);
+
+  // init
+  setTargets();
 })();
 </script>
 </body>
