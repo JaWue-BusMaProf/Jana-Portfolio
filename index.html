@@ -426,6 +426,23 @@ header.hero .hero-inner .hero-card .hero-sub,
 @media (prefers-reduced-motion: reduce) {
   #bg-splats { display: none !important; }
 }
+   /* Mobile: body::before großzügig ausdehnen, damit kein sichtbarer Naht-Übergang entsteht */
+@media (max-width:720px) {
+  body::before {
+    top: -20vh !important;
+    height: calc(100% + 40vh) !important; /* erweitert den Layer über und unter den Viewport */
+    left: 0 !important;
+    right: 0 !important;
+    background-position: top center !important;
+    background-size: 100% 140vh !important; /* dehnt den Gradient, kein Kacheln / Schnittkante */
+    background-repeat: no-repeat !important;
+    will-change: transform, opacity;
+    pointer-events: none;
+  }
+
+  /* Falls ein card- oder panel-Hintergrund die Linie zeigt: stelle sicher, dass Karten keinen eigenen Verlauf oben haben */
+  .card, .hero-card { background-clip: padding-box; }
+} 
   </style>
 </head>
  <!-- Power BI Lightbox Modal (insert once before </body>) -->
@@ -486,7 +503,7 @@ header.hero .hero-inner .hero-card .hero-sub,
 <body>
   <!-- BG Splats: dezente türkise Farbklekse (einfügen in <body>, z.B. nach .floating-avatar) -->
 <div id="bg-splats" aria-hidden="true">
-  <svg id="bg-splats-svg" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" role="presentation">
+<svg id="bg-splats-svg" viewBox="0 0 1000 600" preserveAspectRatio="none" role="presentation" style="width:100%; height:100vh; display:block;">
     <defs>
       <filter id="splatBlur" x="-50%" y="-50%" width="200%" height="200%">
         <feGaussianBlur stdDeviation="18" />
