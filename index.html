@@ -778,7 +778,8 @@ header.hero .hero-inner .hero-card .hero-sub,
 
   function update(){
     const progress = getProgress();
-    const visible = Math.round(progress * maxSplats);
+    // HIER: mindestens 1 Splat sichtbar beim Laden (sonst sieht man bei scrollY=0 nichts)
+    const visible = Math.max(1, Math.round(progress * maxSplats));
     splats.forEach((s, i) => {
       const el = s.el;
       if(i < visible){
