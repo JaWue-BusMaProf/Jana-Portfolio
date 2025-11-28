@@ -416,6 +416,35 @@ header.hero .hero-inner .hero-card .hero-sub,
 @media (prefers-reduced-motion: reduce) {
   #bg-splats { display: none !important; }
 }
+   /* Füge diese CSS-Regeln in den vorhandenen <style> Block von index.html ein */
+#bg-splats { display: none !important; } /* dynamische JS‑Splats ausblenden */
+
+/* Statischer, deterministischer Splats‑Overlay (sichtbar, immer gleich) */
+body::after{
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2; /* hinter Inhalten, über dem Grundverlauf */
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: top right, top left, center right;
+  background-size: 48% 48%, 36% 36%, 52% 52%;
+  background-image:
+    radial-gradient(closest-side at 85% 12%,
+      rgba(43,123,222,0.26) 0%,
+      rgba(43,123,222,0.12) 38%,
+      transparent 62%),
+    radial-gradient(closest-side at 12% 18%,
+      rgba(92,200,198,0.18) 0%,
+      rgba(92,200,198,0.08) 36%,
+      transparent 60%),
+    radial-gradient(closest-side at 70% 48%,
+      rgba(32,180,200,0.14) 0%,
+      rgba(32,180,200,0.06) 40%,
+      transparent 66%);
+  opacity: 1;
+  will-change: opacity;
+} 
   </style>
 </head>
  <!-- Power BI Lightbox Modal (insert once before </body>) -->
