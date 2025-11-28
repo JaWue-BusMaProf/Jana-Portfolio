@@ -382,28 +382,31 @@ header.hero .hero-inner .hero-card .hero-sub,
   }
 }
     /* BG Splats - dezente türkise Farbkleckse (ans Ende des <style>-Blocks) */
+/* Ersetze den alten #bg-splats / #bg-splats-svg Block durch diesen */
 #bg-splats {
   position: fixed;
   inset: 0;
-  z-index: -5;            /* hinter avatar/hero-card */
+  z-index: -2;            /* hinter Inhalt, aber über body::before */
   pointer-events: none;
-  overflow: visible;
+  overflow: hidden;
+  /* gleicher Basis-Gradient wie body: verdeckt Schnittkanten */
+  background: linear-gradient(180deg,
+    #1f2225 0%,
+    #323639 25%,
+    #5f6a70 50%,
+    #d9dde0 80%,
+    #f2f4f5 100%);
+  background-size: 100% 140vh;
+  background-position: top center;
 }
 
 #bg-splats-svg {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   display: block;
-}
-
-#splats circle,
-#splats ellipse {
-  will-change: transform, opacity;
-  /* stärkere Grundsichtbarkeit */
-  opacity: 0.60;
-  transform-origin: center center;
-  /* kein CSS transform-transition — JS übernimmt das smoothing */
-  filter: url(#splatBlur);
+  filter: saturate(1.12) contrast(1.03);
   pointer-events: none;
 }
 
@@ -503,7 +506,7 @@ header.hero .hero-inner .hero-card .hero-sub,
 <body>
   <!-- BG Splats: dezente türkise Farbklekse (einfügen in <body>, z.B. nach .floating-avatar) -->
 <div id="bg-splats" aria-hidden="true">
-<svg id="bg-splats-svg" viewBox="0 0 1000 600" preserveAspectRatio="none" role="presentation" style="width:100%; height:100vh; display:block;">
+<svg id="bg-splats-svg" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" role="presentation" style="position:fixed; inset:0; width:100%; height:100%; display:block;">
     <defs>
       <filter id="splatBlur" x="-50%" y="-50%" width="200%" height="200%">
         <feGaussianBlur stdDeviation="18" />
