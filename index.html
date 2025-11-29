@@ -453,7 +453,7 @@ header.hero .hero-inner .hero-card .hero-sub,
   left:0;
   width:110px;              /* Desktop-Breite */
   height:100vh;
-  z-index:-2;               /* hinter Inhalt, über dem Grundverlauf */
+  z-index:-1;               /* hinter Inhalt, über dem Grundverlauf */
   pointer-events:none;
   display:block;
 }
@@ -465,7 +465,7 @@ header.hero .hero-inner .hero-card .hero-sub,
   height:100%;
   transform-origin: top center;
   transform: scaleY(0.25);  /* initial kurz */
-  background: linear-gradient(180deg, rgba(32,180,200,0.98) 0%, rgba(43,123,222,0.92) 100%);
+  background: linear-gradient(180deg, rgba(34,198,184,0.98) 0%, rgba(43,160,170,0.92) 60%, rgba(38,145,140,0.85) 100% );
   box-shadow: 2px 0 18px rgba(7,30,42,0.08);
   border-right: 1px solid rgba(255,255,255,0.03);
   will-change: transform, opacity;
@@ -475,6 +475,8 @@ header.hero .hero-inner .hero-card .hero-sub,
 @media (max-width:720px){
   #left-stripe { width:68px; }
   #left-stripe .fill { background: linear-gradient(180deg, rgba(32,180,200,0.95) 0%, rgba(43,123,222,0.88) 100%); }
+}
+  #bg-splats { display: none !important; }
 }
   </style>
 </head>
@@ -866,7 +868,7 @@ header.hero .hero-inner .hero-card .hero-sub,
   // smoothing state
   let current = 0.25;
   let target = current;
-  const minScale = 0.25; // initial short
+  const minScale = 0.35; // initial short
   const maxScale = 3.0;  // how long it can grow (tweakable)
 
   function updateTarget(){
