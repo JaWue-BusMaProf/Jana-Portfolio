@@ -471,10 +471,18 @@ header.hero .hero-inner .hero-card .hero-sub,
   will-change: transform, opacity;
 }
 
-/* Mobile: schmaler */
-@media (max-width:720px){
-  #left-stripe { width:68px; }
-  #left-stripe .fill { background: linear-gradient(180deg, rgba(32,180,200,0.95) 0%, rgba(43,123,222,0.88) 100%); }
+/* MOBILE: zwinge das türkise Aussehen auf kleinen Bildschirmen */
+@media (max-width:720px) {
+  /* Stelle sicher, dass die mobile Regel die Desktop-Farbe überschreibt */
+  #left-stripe .fill {
+    background: linear-gradient(180deg,
+      rgba(38,185,170,0.96) 0%,
+      rgba(43,160,170,0.88) 100%
+    ) !important;
+    box-shadow: 2px 0 14px rgba(13,90,94,0.09) !important;
+    /* falls du initial etwas sichtbarer willst auf Mobile: */
+    transform: scaleY(0.40) !important;
+  }
 }
   #bg-splats { display: none !important; }
 }
@@ -855,27 +863,30 @@ header.hero .hero-inner .hero-card .hero-sub,
   setTargets();
 })();
 </script>
-  <script>
+<!-- Ersetze dein vorhandenes left-stripe script durch dieses (weicheres Wachstum mit Easing) -->
+<script>
 (function(){
   const fill = document.querySelector('#left-stripe .fill');
   if(!fill) return;
   if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    // reduced motion: set static long stripe
     fill.style.transform = 'scaleY(1)';
     return;
   }
 
   // smoothing state
-  let current = 0.25;
+  let current = 0.35;          // sichtbare Anfangslänge (leicht erhöht)
   let target = current;
-  const minScale = 0.35; // initial short
-  const maxScale = 3.0;  // how long it can grow (tweakable)
+  const minScale = 0.25;      // Minimalwert
+  const maxScale = 2.2;       // Maximalhöhe (reduziert gegenüber vorher)
+  const easePower = 1.8;      // >1 = langsameres Startwachstum (p^power)
 
   function updateTarget(){
     const doc = document.documentElement;
     const scrollable = Math.max(1, doc.scrollHeight - window.innerHeight);
-    const p = Math.min(1, Math.max(0, window.scrollY / scrollable));
-    target = minScale + p * (maxScale - minScale);
+    let p = Math.min(1, Math.max(0, window.scrollY / scrollable));
+    // Easing: p^easePower macht das Wachstum am Anfang langsamer
+    const pEased = Math.pow(p, easePower);
+    target = minScale + pEased * (maxScale - minScale);
     startRaf();
   }
 
@@ -883,11 +894,10 @@ header.hero .hero-inner .hero-card .hero-sub,
   function startRaf(){
     if(raf) return;
     function step(){
-      // smoothing factor: smaller = smoother/slower
-      const f = 0.12;
+      const f = 0.10; // smoothing factor: kleiner = weicher/langsamer
       current += (target - current) * f;
       fill.style.transform = `scaleY(${current})`;
-      if(Math.abs(current - target) > 0.001){
+      if(Math.abs(current - target) > 0.0008){
         raf = requestAnimationFrame(step);
       } else {
         raf = null;
