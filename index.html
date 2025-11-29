@@ -451,7 +451,7 @@ header.hero .hero-inner .hero-card .hero-sub,
   position:fixed;
   top:0;
   left:0;
-  width:110px;              /* Desktop-Breite */
+  width:70px;              /* Desktop-Breite */
   height:100vh;
   z-index:-1;               /* hinter Inhalt, über dem Grundverlauf */
   pointer-events:none;
@@ -482,6 +482,9 @@ header.hero .hero-inner .hero-card .hero-sub,
     box-shadow: 2px 0 14px rgba(13,90,94,0.09) !important;
     /* falls du initial etwas sichtbarer willst auf Mobile: */
     transform: scaleY(0.40);
+  }
+   #left-stripe {
+    width: 52px !important;
   }
 }
   #bg-splats { display: none !important; }
@@ -878,7 +881,7 @@ header.hero .hero-inner .hero-card .hero-sub,
   let target = current;
   const minScale = 0.25;      // Minimalwert
   const maxScale = 2.2;       // Maximalhöhe (reduziert gegenüber vorher)
-  const easePower = 1.8;      // >1 = langsameres Startwachstum (p^power)
+  const easePower = 2.6;      // >1 = langsameres Startwachstum (p^power)
 
   function updateTarget(){
     const doc = document.documentElement;
@@ -894,7 +897,7 @@ header.hero .hero-inner .hero-card .hero-sub,
   function startRaf(){
     if(raf) return;
     function step(){
-      const f = 0.10; // smoothing factor: kleiner = weicher/langsamer
+      const f = 0.06; // smoothing factor: kleiner = weicher/langsamer
       current += (target - current) * f;
       fill.style.transform = `scaleY(${current})`;
       if(Math.abs(current - target) > 0.0008){
