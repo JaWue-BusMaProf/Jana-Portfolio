@@ -684,6 +684,8 @@ header.hero .hero-inner .hero-card .hero-sub,
         src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png"
         alt="Screenshot des Power BI Sales Dashboard"
         data-i18n-alt="imgAltHardSoft"
+        data-src-de="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png"
+        data-src-en="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft_en.png"
         style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
       />
     </a>
@@ -702,6 +704,8 @@ header.hero .hero-inner .hero-card .hero-sub,
         src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png"
         alt="Impact vs Effort Visual"
         data-i18n-alt="imgAltImpact"
+        data-src-de="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png"
+        data-src-en="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort_en.png"
         style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
       />
     </a>
@@ -720,6 +724,8 @@ header.hero .hero-inner .hero-card .hero-sub,
         src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png"
         alt="Interessen Visual"
         data-i18n-alt="imgAltInterests"
+        data-src-de="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png"
+        data-src-en="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen_en.png"
         style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
       />
     </a>
@@ -1064,6 +1070,28 @@ header.hero .hero-inner .hero-card .hero-sub,
     return result;
   }
 
+  // Helper function to update language-specific images
+  function setLangImages(lang) {
+    // Update all images that have both data-src-de and data-src-en
+    document.querySelectorAll('[data-src-de][data-src-en]').forEach(img => {
+      const srcDe = img.getAttribute('data-src-de');
+      const srcEn = img.getAttribute('data-src-en');
+      
+      // Update img src based on language
+      if (lang === 'en' && srcEn) {
+        img.src = srcEn;
+      } else if (srcDe) {
+        img.src = srcDe;
+      }
+      
+      // Update alt text if translations exist
+      const altKey = img.getAttribute('data-i18n-alt');
+      if (altKey && translations[altKey] && translations[altKey][lang]) {
+        img.alt = translations[altKey][lang];
+      }
+    });
+  }
+
   // Apply translations
   function applyLanguage(lang) {
     currentLang = lang;
@@ -1116,6 +1144,9 @@ header.hero .hero-inner .hero-card .hero-sub,
     // Update button states
     document.getElementById('lang-de').setAttribute('aria-pressed', lang === 'de' ? 'true' : 'false');
     document.getElementById('lang-en').setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
+    
+    // Update language-specific images
+    setLangImages(lang);
     
     // Save preference
     try {
