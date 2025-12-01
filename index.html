@@ -1023,10 +1023,31 @@ header.hero .hero-inner .hero-card .hero-sub,
     contactCtaDownload: { de: 'CV herunterladen', en: 'Download CV' },
     
     // Footer
-    footerContact: { de: 'Kontakt', en: 'Contact' }
+    footerContact: { de: 'Kontakt', en: 'Contact' },
+    
+    // Language toggle aria-label
+    langToggleAriaLabel: { de: 'Sprache wählen', en: 'Select language' }
   };
 
   let currentLang = 'de';
+  
+  // Safe list of allowed HTML tags for translations that need formatting
+  const ALLOWED_TAGS = ['strong', 'em', 'b', 'i'];
+  
+  // Sanitize HTML to only allow safe tags (strong, em for formatting)
+  function sanitizeHTML(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    let result = div.innerHTML;
+    // Re-enable only safe tags
+    ALLOWED_TAGS.forEach(tag => {
+      const openTag = new RegExp('&lt;' + tag + '&gt;', 'gi');
+      const closeTag = new RegExp('&lt;/' + tag + '&gt;', 'gi');
+      result = result.replace(openTag, '<' + tag + '>');
+      result = result.replace(closeTag, '</' + tag + '>');
+    });
+    return result;
+  }
 
   // Apply translations
   function applyLanguage(lang) {
@@ -1039,11 +1060,12 @@ header.hero .hero-inner .hero-card .hero-sub,
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (translations[key] && translations[key][lang]) {
-        el.innerHTML = translations[key][lang];
+        // Use sanitized HTML for translations that may contain formatting tags
+        el.innerHTML = sanitizeHTML(translations[key][lang]);
       }
     });
     
-    // Update alt attributes
+    // Update alt attributes (always plain text)
     document.querySelectorAll('[data-i18n-alt]').forEach(el => {
       const key = el.getAttribute('data-i18n-alt');
       if (translations[key] && translations[key][lang]) {
@@ -1051,7 +1073,7 @@ header.hero .hero-inner .hero-card .hero-sub,
       }
     });
     
-    // Update aria-label attributes
+    // Update aria-label attributes (always plain text)
     document.querySelectorAll('[data-i18n-arialabel]').forEach(el => {
       const key = el.getAttribute('data-i18n-arialabel');
       if (translations[key] && translations[key][lang]) {
@@ -1059,20 +1081,21 @@ header.hero .hero-inner .hero-card .hero-sub,
       }
     });
     
-    // Update mailto subject lines
+    // Update mailto subject lines with proper URL encoding
     document.querySelectorAll('[data-i18n-subject-' + lang + ']').forEach(el => {
       const subject = el.getAttribute('data-i18n-subject-' + lang);
       const href = el.getAttribute('href');
       if (href && href.startsWith('mailto:')) {
         const baseEmail = href.split('?')[0];
-        el.setAttribute('href', baseEmail + '?subject=' + subject);
+        // Properly encode the subject for URL
+        el.setAttribute('href', baseEmail + '?subject=' + encodeURIComponent(decodeURIComponent(subject)));
       }
     });
     
-    // Update language toggle aria-label
+    // Update language toggle aria-label from translations
     const langToggle = document.querySelector('.lang-toggle');
-    if (langToggle) {
-      langToggle.setAttribute('aria-label', lang === 'de' ? 'Sprache wählen' : 'Select language');
+    if (langToggle && translations.langToggleAriaLabel && translations.langToggleAriaLabel[lang]) {
+      langToggle.setAttribute('aria-label', translations.langToggleAriaLabel[lang]);
     }
     
     // Update button states
