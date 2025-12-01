@@ -621,7 +621,13 @@ header.hero .hero-inner .hero-card .hero-sub,
 
         <div class="cta-group" role="navigation" aria-label="Call to actions">
   <a class="btn primary" id="hero-cta-contact" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio" data-i18n="ctaContact" data-i18n-subject-de="Kontakt%20via%20Portfolio" data-i18n-subject-en="Contact%20via%20Portfolio">Kontakt</a>
-  <a class="btn ghost" href="Lebenslauf.pdf" download data-i18n="ctaDownloadCV" data-href-de="Lebenslauf.pdf" data-href-en="Lebenslauf_en.pdf">CV herunterladen</a>
+ <a class="btn ghost cv-download"
+   href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Lebenslauf.pdf"
+   download
+   data-src-de="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Lebenslauf.pdf"
+   data-src-en="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Lebenslauf_en.pdf"
+   data-i18n="ctaDownloadCV"
+   target="_blank" rel="noopener">CV herunterladen</a>
   <a class="btn ghost" href="#portfolio" data-i18n="ctaPortfolio">Portfolio</a>
 </div>
       </div>
@@ -757,7 +763,13 @@ header.hero .hero-inner .hero-card .hero-sub,
         </ul>
       </section>
 
-      <section id="contact" class="card reveal" aria-labelledby="contact-heading">
+      <a class="btn ghost cv-download"
+   href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Lebenslauf.pdf"
+   download
+   data-src-de="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Lebenslauf.pdf"
+   data-src-en="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Lebenslauf_en.pdf"
+   data-i18n="contactCtaDownload"
+   target="_blank" rel="noopener">CV herunterladen</a>
         <h2 id="contact-heading" data-i18n="contactHeading">Kontakt</h2>
         <p data-i18n="contactText">Für Kooperationen, Ideen oder Fragen – am besten telefonisch erreichbar.</p>
 
@@ -1192,6 +1204,31 @@ header.hero .hero-inner .hero-card .hero-sub,
   } else {
     init();
   }
+})();
+</script>
+  <script>
+(function(){
+  function setCvLinksFor(lang){
+    document.querySelectorAll('.cv-download').forEach(function(a){
+      var src = (lang === 'en') ? a.getAttribute('data-src-en') : a.getAttribute('data-src-de');
+      if(src) a.setAttribute('href', src);
+      if(!a.hasAttribute('download')) a.setAttribute('download','');
+    });
+  }
+  function getInitialLang(){
+    var btnEn = document.getElementById('lang-en'), btnDe = document.getElementById('lang-de');
+    if(btnEn && btnEn.getAttribute('aria-pressed') === 'true') return 'en';
+    if(btnDe && btnDe.getAttribute('aria-pressed') === 'true') return 'de';
+    var htmlLang = document.documentElement.getAttribute('lang') || 'de';
+    return htmlLang.toLowerCase().startsWith('en') ? 'en' : 'de';
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    setCvLinksFor(getInitialLang());
+    var btnEn = document.getElementById('lang-en');
+    var btnDe = document.getElementById('lang-de');
+    if(btnEn) btnEn.addEventListener('click', function(){ btnEn.setAttribute('aria-pressed','true'); if(btnDe) btnDe.setAttribute('aria-pressed','false'); setCvLinksFor('en'); });
+    if(btnDe) btnDe.addEventListener('click', function(){ if(btnEn) btnEn.setAttribute('aria-pressed','false'); btnDe.setAttribute('aria-pressed','true'); setCvLinksFor('de'); });
+  });
 })();
 </script>
 </body>
