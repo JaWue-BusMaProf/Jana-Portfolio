@@ -1111,9 +1111,10 @@ header.hero .hero-inner .hero-card .hero-sub,
       const srcDe = link.getAttribute('data-src-de');
       const srcEn = link.getAttribute('data-src-en');
       
-      // Only update if both attributes exist
-      if (srcDe && srcEn) {
-        link.href = (lang === 'en') ? srcEn : srcDe;
+      // Update href based on language if the corresponding attribute exists
+      const newHref = (lang === 'en') ? srcEn : srcDe;
+      if (newHref) {
+        link.href = newHref;
       }
     });
   }
