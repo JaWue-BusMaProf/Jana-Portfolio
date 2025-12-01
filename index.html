@@ -756,36 +756,27 @@ header.hero .hero-inner .hero-card .hero-sub,
         </ol>
       </section>
 
-      <section id="skills" class="card reveal" aria-labelledby="skills-heading">
-        <h2 id="skills-heading" data-i18n="skillsHeading">Skills & Tools</h2>
-        <ul class="skills" aria-label="Liste der Fähigkeiten" data-i18n-arialabel="skillsAriaLabel">
-          <li data-i18n="skill1">Controlling</li><li data-i18n="skill2">Reporting</li><li data-i18n="skill3">Prozessoptimierung</li><li data-i18n="skill4">KPI-Analyse</li><li data-i18n="skill5">Power BI</li><li data-i18n="skill6">Excel (Power Query, Pivot, SVERWEIS)</li><li data-i18n="skill7">Microsoft 365 Copilot</li><li data-i18n="skill8">AI-Tooling & Prompting</li>
-        </ul>
-      </section>
+     <section id="contact" class="card reveal" aria-labelledby="contact-heading">
+  <h2 id="contact-heading" data-i18n="contactHeading">Kontakt</h2>
+  <p data-i18n="contactText">Für Kooperationen, Ideen oder Fragen – am besten telefonisch erreichbar.</p>
 
-  766:       <a class="btn ghost cv-download"
-767:    href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Lebenslauf.pdf"
-768:    download
-769:    data-src-de="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Lebenslauf.pdf"
-770:    data-src-en="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Lebenslauf_en.pdf"
-771:    data-i18n="contactCtaDownload"
-772:    target="_blank" rel="noopener">CV herunterladen</a>
-        <h2 id="contact-heading" data-i18n="contactHeading">Kontakt</h2>
-        <p data-i18n="contactText">Für Kooperationen, Ideen oder Fragen – am besten telefonisch erreichbar.</p>
+  <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px">
+    <a class="btn primary" id="contact-cta-email"
+       href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio"
+       data-i18n="contactCtaEmail"
+       data-i18n-subject-de="Kontakt%20via%20Portfolio"
+       data-i18n-subject-en="Contact%20via%20Portfolio">Email</a>
 
-        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px">
-  <a class="btn primary" id="contact-cta-email" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio" data-i18n="contactCtaEmail" data-i18n-subject-de="Kontakt%20via%20Portfolio" data-i18n-subject-en="Contact%20via%20Portfolio">E‑Mail schreiben</a>
-  <a class="btn ghost" href="Lebenslauf.pdf" download data-i18n="contactCtaDownload" data-href-de="Lebenslauf.pdf" data-href-en="Lebenslauf_en.pdf">CV herunterladen</a>
-</div>
-
-      </section>
-
-    </div>
-  </main>
-
-  <footer class="site-footer" role="contentinfo">
-    <div class="wrap">
-      © <span id="year"></span> Jana Wünsch — Business Master Professional • <a href="#contact" data-i18n="footerContact">Kontakt</a>
+    <!-- Correct Contact CV link (single, language-aware, opens in new tab) -->
+    <a class="btn ghost cv-download"
+       href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Lebenslauf.pdf"
+       download
+       data-src-de="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Lebenslauf.pdf"
+       data-src-en="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Lebenslauf_en.pdf"
+       data-i18n="contactCtaDownload"
+       target="_blank" rel="noopener">CV herunterladen</a>
+  </div>
+</section>
     </div>
   </footer>
 
