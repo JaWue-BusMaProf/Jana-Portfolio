@@ -621,7 +621,7 @@ header.hero .hero-inner .hero-card .hero-sub,
 
         <div class="cta-group" role="navigation" aria-label="Call to actions">
   <a class="btn primary" id="hero-cta-contact" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio" data-i18n="ctaContact" data-i18n-subject-de="Kontakt%20via%20Portfolio" data-i18n-subject-en="Contact%20via%20Portfolio">Kontakt</a>
-  <a class="btn ghost cv-download" href="Lebenslauf.pdf" download data-i18n="ctaDownloadCV" data-src-de="Lebenslauf.pdf" data-src-en="Lebenslauf_en.pdf">CV herunterladen</a>
+  <a class="btn ghost" href="Lebenslauf.pdf" download data-i18n="ctaDownloadCV" data-href-de="Lebenslauf.pdf" data-href-en="Lebenslauf_en.pdf">CV herunterladen</a>
   <a class="btn ghost" href="#portfolio" data-i18n="ctaPortfolio">Portfolio</a>
 </div>
       </div>
@@ -763,7 +763,7 @@ header.hero .hero-inner .hero-card .hero-sub,
 
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px">
   <a class="btn primary" id="contact-cta-email" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio" data-i18n="contactCtaEmail" data-i18n-subject-de="Kontakt%20via%20Portfolio" data-i18n-subject-en="Contact%20via%20Portfolio">E‑Mail schreiben</a>
-  <a class="btn ghost cv-download" href="Lebenslauf.pdf" download data-i18n="contactCtaDownload" data-src-de="Lebenslauf.pdf" data-src-en="Lebenslauf_en.pdf">CV herunterladen</a>
+  <a class="btn ghost" href="Lebenslauf.pdf" download data-i18n="contactCtaDownload" data-href-de="Lebenslauf.pdf" data-href-en="Lebenslauf_en.pdf">CV herunterladen</a>
 </div>
 
       </section>
@@ -1095,30 +1095,6 @@ header.hero .hero-inner .hero-card .hero-sub,
     });
   }
 
-  /**
-   * Update CV download links based on current language
-   * @param {string} lang - The language code ('de' for German, 'en' for English)
-   * 
-   * Updates all links with the 'cv-download' class to point to the appropriate CV file.
-   * - German (de): Uses data-src-de attribute value (Lebenslauf.pdf)
-   * - English (en): Uses data-src-en attribute value (Lebenslauf_en.pdf)
-   * 
-   * This function is idempotent and safe: if data-src-de or data-src-en attributes
-   * are missing, the href is left unchanged.
-   */
-  function updateCVLinks(lang) {
-    document.querySelectorAll('.cv-download').forEach(link => {
-      const srcDe = link.getAttribute('data-src-de');
-      const srcEn = link.getAttribute('data-src-en');
-      
-      // Update href based on language if the corresponding attribute exists
-      const newHref = (lang === 'en') ? srcEn : srcDe;
-      if (newHref) {
-        link.href = newHref;
-      }
-    });
-  }
-
   // Apply translations
   function applyLanguage(lang) {
     currentLang = lang;
@@ -1181,9 +1157,6 @@ header.hero .hero-inner .hero-card .hero-sub,
     
     // Update language-specific images and links
     setLangImages(lang);
-    
-    // Update CV download links
-    updateCVLinks(lang);
   }
 
   // Initialize on DOMContentLoaded
