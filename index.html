@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" id="html-root">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -205,6 +205,32 @@ body { /* Textfarbe global auf weiß */ color: var(--text-color); }
 /* Bei Bedarf: Skills‑Pills lesbar machen (weiß auf dunklem Hintergrund) / ul.skills li { color: var(--text-color) !important; background: rgba(255,255,255,0.06); / Beibehalten, oder anpassen */ }
 
 /* Optional: Link‑Hover für bessere Sichtbarkeit */ a:hover { text-decoration:underline; color: #eaf4ff; }
+
+/* Language Toggle Buttons */
+.lang-toggle {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.lang-toggle button {
+  padding: 6px 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: var(--text-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 13px;
+  transition: background .14s ease, color .14s ease;
+}
+.lang-toggle button:hover {
+  background: rgba(255,255,255,0.08);
+}
+.lang-toggle button[aria-pressed="true"] {
+  background: linear-gradient(90deg, var(--btn-start), var(--btn-end));
+  color: var(--btn-text);
+  font-weight: 700;
+}
     /* === Einheitliche Buttons, Headings & Laufbahn-Fix === */
 
 /* Farben / Variablen */
@@ -578,19 +604,25 @@ header.hero .hero-inner .hero-card .hero-sub,
   <header class="hero" role="banner" aria-label="Hero: Jana Wünsch">
     <div class="hero-inner">
       <div class="hero-card" role="region" aria-labelledby="hero-heading">
+        <!-- Language Toggle -->
+        <div class="lang-toggle" role="group" aria-label="Sprache wählen">
+          <button id="lang-de" aria-pressed="true" data-lang="de">DE</button>
+          <button id="lang-en" aria-pressed="false" data-lang="en">EN</button>
+        </div>
+        
         <div class="hero-top">
           <div>
             <h1 id="hero-heading" class="hero-title">Jana Wünsch</h1>
-            <p class="hero-sub accent">Business Master Professional — Digitalisierung • Data • Prozesse</p>
+            <p class="hero-sub accent" data-i18n="heroSub">Business Master Professional — Digitalisierung • Data • Prozesse</p>
           </div>
         </div>
 
-        <p class="tagline">Diese Seite ist ein eigenes Projekt: umgesetzt ohne Programmierkenntnisse, mit Copilot & selbst erlernten HTML-Basics. Learning-Mindset trifft Business-Expertise.</p>
+        <p class="tagline" data-i18n="tagline">Diese Seite ist ein eigenes Projekt: umgesetzt ohne Programmierkenntnisse, mit Copilot & selbst erlernten HTML-Basics. Learning-Mindset trifft Business-Expertise.</p>
 
         <div class="cta-group" role="navigation" aria-label="Call to actions">
-  <a class="btn primary" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio" title="E-Mail schreiben">Kontakt</a>
-  <a class="btn ghost" href="Lebenslauf.pdf" download title="CV herunterladen">CV herunterladen</a>
-  <a class="btn ghost" href="#portfolio" title="Portfolio / Dashboards">Portfolio</a>
+  <a class="btn primary" id="hero-cta-contact" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio" data-i18n="ctaContact" data-i18n-subject-de="Kontakt%20via%20Portfolio" data-i18n-subject-en="Contact%20via%20Portfolio">Kontakt</a>
+  <a class="btn ghost" href="Lebenslauf.pdf" download data-i18n="ctaDownloadCV">CV herunterladen</a>
+  <a class="btn ghost" href="#portfolio" data-i18n="ctaPortfolio">Portfolio</a>
 </div>
       </div>
     </div>
@@ -600,30 +632,30 @@ header.hero .hero-inner .hero-card .hero-sub,
     <div class="panel wrap">
       <section class="row columns-2 reveal" id="about" aria-labelledby="about-heading">
         <div class="card" role="article" aria-labelledby="about-heading">
-          <h2 id="about-heading">Über mich</h2>
-          <p>Ich bin Betriebswirtin mit großer Leidenschaft für Digitalisierung, KI und datengestützte Entscheidungen. Wenn moderne Tools Prozesse vereinfachen, Entscheidungen verbessern oder Workflows spürbar beschleunigen, ergibt sich echter Mehrwert.</p>
+          <h2 id="about-heading" data-i18n="aboutHeading">Über mich</h2>
+          <p data-i18n="aboutText">Ich bin Betriebswirtin mit großer Leidenschaft für Digitalisierung, KI und datengestützte Entscheidungen. Wenn moderne Tools Prozesse vereinfachen, Entscheidungen verbessern oder Workflows spürbar beschleunigen, ergibt sich echter Mehrwert.</p>
 
-          <h3 style="margin-top:14px; margin-bottom:8px; color:var(--muted); font-size:14px">Kern</h3>
+          <h3 style="margin-top:14px; margin-bottom:8px; color:var(--muted); font-size:14px" data-i18n="coreHeading">Kern</h3>
           <ul>
-            <li>Controlling, Reporting & KPI-Analysen</li>
-            <li>Microsoft Excel (Pivot, SVERWEIS)</li>
-            <li>Microsoft 365 Copilot & Power BI (aktuelle Weiterbildung)</li>
-            <li>Analytisches Denken, Prozessoptimierung, Teamarbeit</li>
-            <li>KI Management</li>
+            <li data-i18n="coreItem1">Controlling, Reporting & KPI-Analysen</li>
+            <li data-i18n="coreItem2">Microsoft Excel (Pivot, SVERWEIS)</li>
+            <li data-i18n="coreItem3">Microsoft 365 Copilot & Power BI (aktuelle Weiterbildung)</li>
+            <li data-i18n="coreItem4">Analytisches Denken, Prozessoptimierung, Teamarbeit</li>
+            <li data-i18n="coreItem5">KI Management</li>
           </ul>
         </div>
 
         <aside class="card" role="complementary" aria-labelledby="profile-heading">
-          <h2 id="profile-heading">Kurzprofil</h2>
+          <h2 id="profile-heading" data-i18n="profileHeading">Kurzprofil</h2>
           <div style="margin-top:14px">
-            <h3 style="margin:0 0 8px 0; font-size:14px">Jobtitel</h3>
-          <p style="margin-top:8px; font-weight:600">Master Professional in Business Management</p>
+            <h3 style="margin:0 0 8px 0; font-size:14px" data-i18n="jobTitleLabel">Jobtitel</h3>
+          <p style="margin-top:8px; font-weight:600" data-i18n="jobTitle">Master Professional in Business Management</p>
 
           <div style="margin-top:14px">
-            <h3 style="margin:0 0 8px 0; font-size:14px">Kontakt</h3>
+            <h3 style="margin:0 0 8px 0; font-size:14px" data-i18n="contactLabel">Kontakt</h3>
             <div class="meta">
-  <div><strong>Email:</strong> <a href="mailto:j_rommel@outlook.com">j_rommel@outlook.com</a></div>
-  <div><strong>Tel:</strong> <a href="tel:+4917632423319">+49 176 32423319</a></div>
+  <div><strong data-i18n="emailLabel">Email:</strong> <a href="mailto:j_rommel@outlook.com">j_rommel@outlook.com</a></div>
+  <div><strong data-i18n="phoneLabel">Tel:</strong> <a href="tel:+4917632423319">+49 176 32423319</a></div>
   <div><strong>Instagram:</strong> <a href="https://instagram.com/wnh.jn" target="_blank" rel="noopener">@wnh.jn</a></div>
 </div>
           </div>
@@ -632,56 +664,59 @@ header.hero .hero-inner .hero-card .hero-sub,
       </section>
 
       <section id="portfolio" class="card reveal" aria-labelledby="portfolio-heading">
-        <h2 id="portfolio-heading">Portfolio — Skills, ausgewählte eigene Projekte & Privat</h2>
+        <h2 id="portfolio-heading" data-i18n="portfolioHeading">Portfolio — Skills, ausgewählte eigene Projekte & Privat</h2>
         <div class="dashboard-grid" style="margin-top:12px">
 
   <!-- vorhandene Karte: Power BI — Screenshot (screen_hard_soft) -->
   <article class="card" style="padding:14px;">
-    <h3 style="margin:0 0 8px 0">Hard- & Softskills</h3>
+    <h3 style="margin:0 0 8px 0" data-i18n="cardHardSoftTitle">Hard- & Softskills</h3>
 
     <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png" target="_blank" rel="noopener" aria-label="Screenshot in neuem Tab öffnen">
       <img
         src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png"
         alt="Screenshot des Power BI Sales Dashboard"
+        data-i18n-alt="imgAltHardSoft"
         style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
       />
     </a>
 
-    <p class="muted" style="margin-top:8px">
+    <p class="muted" style="margin-top:8px" data-i18n="cardHardSoftDesc">
       Meine am stärksten ausgeprägten Fähigkeiten im Überblick.
     </p>
   </article>
 
   <!-- neue Karte: Impact vs. Effort -->
   <article class="card" style="padding:14px;">
-    <h3 style="margin:0 0 8px 0">Impact vs. Effort — Analyse</h3>
+    <h3 style="margin:0 0 8px 0" data-i18n="cardImpactTitle">Impact vs. Effort — Analyse</h3>
 
     <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png" target="_blank" rel="noopener" aria-label="Impact vs Effort Bild in neuem Tab öffnen">
       <img
         src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png"
         alt="Impact vs Effort Visual"
+        data-i18n-alt="imgAltImpact"
         style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
       />
     </a>
 
-    <p class="muted" style="margin-top:8px">
+    <p class="muted" style="margin-top:8px" data-i18n="cardImpactDesc">
       Mit jedem Projekt wurden meine Ergebnisse stärker – und der nötige Aufwand geringer.
     </p>
   </article>
 
   <!-- neue Karte: Interessen -->
   <article class="card" style="padding:14px;">
-    <h3 style="margin:0 0 8px 0">Interessen</h3>
+    <h3 style="margin:0 0 8px 0" data-i18n="cardInterestsTitle">Interessen</h3>
 
     <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png" target="_blank" rel="noopener" aria-label="Interessen Bild in neuem Tab öffnen">
       <img
         src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png"
         alt="Interessen Visual"
+        data-i18n-alt="imgAltInterests"
         style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
       />
     </a>
 
-    <p class="muted" style="margin-top:8px">
+    <p class="muted" style="margin-top:8px" data-i18n="cardInterestsDesc">
       Was mich inspiriert und im Gleichgewicht hält.
     </p>
   </article>
@@ -691,30 +726,30 @@ header.hero .hero-inner .hero-card .hero-sub,
       </section>
 
       <section id="laufbahn" class="card reveal" aria-labelledby="laufbahn-heading">
-        <h2 id="laufbahn-heading" class="accent">Laufbahn</h2>
+        <h2 id="laufbahn-heading" class="accent" data-i18n="careerHeading">Laufbahn</h2>
         <ol style="margin:0 0 0 18px; padding:0; color:var(--muted)">
-          <li style="margin-bottom:8px"><strong>06/2025–heute</strong> — Weiterbildung zur KI-Managerin (IHK)</li>
-          <li style="margin-bottom:8px"><strong>2024</strong> — <em>Betriebswirtin</em></li>
-          <li style="margin-bottom:8px"><strong>10/2022–06/2025</strong> — Stellvertretende kaufmännische Leitung</li>
-          <li style="margin-bottom:8px"><strong>01/2019-10/2022</strong> — Kaufmännische Angestellte</li>
-          <li style="margin-bottom:8px"><strong>2018</strong> — <em>Handelsfachwirtin</em></li>
+          <li style="margin-bottom:8px" data-i18n="careerItem1"><strong>06/2025–heute</strong> — Weiterbildung zur KI-Managerin (IHK)</li>
+          <li style="margin-bottom:8px" data-i18n="careerItem2"><strong>2024</strong> — <em>Betriebswirtin</em></li>
+          <li style="margin-bottom:8px" data-i18n="careerItem3"><strong>10/2022–06/2025</strong> — Stellvertretende kaufmännische Leitung</li>
+          <li style="margin-bottom:8px" data-i18n="careerItem4"><strong>01/2019-10/2022</strong> — Kaufmännische Angestellte</li>
+          <li style="margin-bottom:8px" data-i18n="careerItem5"><strong>2018</strong> — <em>Handelsfachwirtin</em></li>
         </ol>
       </section>
 
       <section id="skills" class="card reveal" aria-labelledby="skills-heading">
-        <h2 id="skills-heading">Skills & Tools</h2>
-        <ul class="skills" aria-label="Liste der Fähigkeiten">
-          <li>Controlling</li><li>Reporting</li><li>Prozessoptimierung</li><li>KPI-Analyse</li><li>Power BI</li><li>Excel (Power Query, Pivot, SVERWEIS)</li><li>Microsoft 365 Copilot</li><li>AI-Tooling & Prompting</li>
+        <h2 id="skills-heading" data-i18n="skillsHeading">Skills & Tools</h2>
+        <ul class="skills" aria-label="Liste der Fähigkeiten" data-i18n-arialabel="skillsAriaLabel">
+          <li data-i18n="skill1">Controlling</li><li data-i18n="skill2">Reporting</li><li data-i18n="skill3">Prozessoptimierung</li><li data-i18n="skill4">KPI-Analyse</li><li data-i18n="skill5">Power BI</li><li data-i18n="skill6">Excel (Power Query, Pivot, SVERWEIS)</li><li data-i18n="skill7">Microsoft 365 Copilot</li><li data-i18n="skill8">AI-Tooling & Prompting</li>
         </ul>
       </section>
 
       <section id="contact" class="card reveal" aria-labelledby="contact-heading">
-        <h2 id="contact-heading">Kontakt</h2>
-        <p>Für Kooperationen, Ideen oder Fragen – am besten telefonisch erreichbar.</p>
+        <h2 id="contact-heading" data-i18n="contactHeading">Kontakt</h2>
+        <p data-i18n="contactText">Für Kooperationen, Ideen oder Fragen – am besten telefonisch erreichbar.</p>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px">
-  <a class="btn primary" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio">E‑Mail schreiben</a>
-  <a class="btn ghost" href="Lebenslauf.pdf" download>CV herunterladen</a>
+  <a class="btn primary" id="contact-cta-email" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio" data-i18n="contactCtaEmail" data-i18n-subject-de="Kontakt%20via%20Portfolio" data-i18n-subject-en="Contact%20via%20Portfolio">E‑Mail schreiben</a>
+  <a class="btn ghost" href="Lebenslauf.pdf" download data-i18n="contactCtaDownload">CV herunterladen</a>
 </div>
 
       </section>
@@ -724,7 +759,7 @@ header.hero .hero-inner .hero-card .hero-sub,
 
   <footer class="site-footer" role="contentinfo">
     <div class="wrap">
-      © <span id="year"></span> Jana Wünsch — Business Master Professional • <a href="#contact">Kontakt</a>
+      © <span id="year"></span> Jana Wünsch — Business Master Professional • <a href="#contact" data-i18n="footerContact">Kontakt</a>
     </div>
   </footer>
 
@@ -907,6 +942,207 @@ header.hero .hero-inner .hero-card .hero-sub,
   window.addEventListener('resize', updateTarget);
   // init
   updateTarget();
+})();
+</script>
+<!-- i18n Language Toggle Script -->
+<script>
+(function(){
+  // Translations object - German (de) is default, English (en) added
+  const translations = {
+    // Hero section
+    heroSub: {
+      de: 'Business Master Professional — Digitalisierung • Data • Prozesse',
+      en: 'Business Master Professional — Digitalization • Data • Processes'
+    },
+    tagline: {
+      de: 'Diese Seite ist ein eigenes Projekt: umgesetzt ohne Programmierkenntnisse, mit Copilot & selbst erlernten HTML-Basics. Learning-Mindset trifft Business-Expertise.',
+      en: 'This page is a personal project: built without prior programming knowledge, using Copilot & self-taught HTML basics. A learning mindset meets business expertise.'
+    },
+    // CTA buttons
+    ctaContact: { de: 'Kontakt', en: 'Contact' },
+    ctaDownloadCV: { de: 'CV herunterladen', en: 'Download CV' },
+    ctaPortfolio: { de: 'Portfolio', en: 'Portfolio' },
+    
+    // About section
+    aboutHeading: { de: 'Über mich', en: 'About Me' },
+    aboutText: {
+      de: 'Ich bin Betriebswirtin mit großer Leidenschaft für Digitalisierung, KI und datengestützte Entscheidungen. Wenn moderne Tools Prozesse vereinfachen, Entscheidungen verbessern oder Workflows spürbar beschleunigen, ergibt sich echter Mehrwert.',
+      en: 'I am a business administrator with a passion for digitalization, AI, and data-driven decisions. When modern tools simplify processes, improve decisions, or noticeably accelerate workflows, real value is created.'
+    },
+    coreHeading: { de: 'Kern', en: 'Core Skills' },
+    coreItem1: { de: 'Controlling, Reporting & KPI-Analysen', en: 'Controlling, Reporting & KPI Analysis' },
+    coreItem2: { de: 'Microsoft Excel (Pivot, SVERWEIS)', en: 'Microsoft Excel (Pivot, VLOOKUP)' },
+    coreItem3: { de: 'Microsoft 365 Copilot & Power BI (aktuelle Weiterbildung)', en: 'Microsoft 365 Copilot & Power BI (current training)' },
+    coreItem4: { de: 'Analytisches Denken, Prozessoptimierung, Teamarbeit', en: 'Analytical Thinking, Process Optimization, Teamwork' },
+    coreItem5: { de: 'KI Management', en: 'AI Management' },
+    
+    // Profile section
+    profileHeading: { de: 'Kurzprofil', en: 'Brief Profile' },
+    jobTitleLabel: { de: 'Jobtitel', en: 'Job Title' },
+    jobTitle: { de: 'Master Professional in Business Management', en: 'Master Professional in Business Management' },
+    contactLabel: { de: 'Kontakt', en: 'Contact' },
+    emailLabel: { de: 'Email:', en: 'Email:' },
+    phoneLabel: { de: 'Tel:', en: 'Phone:' },
+    
+    // Portfolio section
+    portfolioHeading: { de: 'Portfolio — Skills, ausgewählte eigene Projekte & Privat', en: 'Portfolio — Skills, Selected Projects & Personal' },
+    cardHardSoftTitle: { de: 'Hard- & Softskills', en: 'Hard & Soft Skills' },
+    cardHardSoftDesc: { de: 'Meine am stärksten ausgeprägten Fähigkeiten im Überblick.', en: 'An overview of my most developed skills.' },
+    imgAltHardSoft: { de: 'Screenshot des Power BI Sales Dashboard', en: 'Screenshot of Power BI Sales Dashboard' },
+    cardImpactTitle: { de: 'Impact vs. Effort — Analyse', en: 'Impact vs. Effort — Analysis' },
+    cardImpactDesc: { de: 'Mit jedem Projekt wurden meine Ergebnisse stärker – und der nötige Aufwand geringer.', en: 'With each project, my results improved — and the required effort decreased.' },
+    imgAltImpact: { de: 'Impact vs Effort Visual', en: 'Impact vs Effort Visual' },
+    cardInterestsTitle: { de: 'Interessen', en: 'Interests' },
+    cardInterestsDesc: { de: 'Was mich inspiriert und im Gleichgewicht hält.', en: 'What inspires me and keeps me balanced.' },
+    imgAltInterests: { de: 'Interessen Visual', en: 'Interests Visual' },
+    
+    // Career section
+    careerHeading: { de: 'Laufbahn', en: 'Career' },
+    careerItem1: { de: '<strong>06/2025–heute</strong> — Weiterbildung zur KI-Managerin (IHK)', en: '<strong>06/2025–present</strong> — AI Manager Training (IHK)' },
+    careerItem2: { de: '<strong>2024</strong> — <em>Betriebswirtin</em>', en: '<strong>2024</strong> — <em>Business Administrator</em>' },
+    careerItem3: { de: '<strong>10/2022–06/2025</strong> — Stellvertretende kaufmännische Leitung', en: '<strong>10/2022–06/2025</strong> — Deputy Commercial Manager' },
+    careerItem4: { de: '<strong>01/2019-10/2022</strong> — Kaufmännische Angestellte', en: '<strong>01/2019–10/2022</strong> — Commercial Employee' },
+    careerItem5: { de: '<strong>2018</strong> — <em>Handelsfachwirtin</em>', en: '<strong>2018</strong> — <em>Certified Trade Specialist</em>' },
+    
+    // Skills section
+    skillsHeading: { de: 'Skills & Tools', en: 'Skills & Tools' },
+    skillsAriaLabel: { de: 'Liste der Fähigkeiten', en: 'List of skills' },
+    skill1: { de: 'Controlling', en: 'Controlling' },
+    skill2: { de: 'Reporting', en: 'Reporting' },
+    skill3: { de: 'Prozessoptimierung', en: 'Process Optimization' },
+    skill4: { de: 'KPI-Analyse', en: 'KPI Analysis' },
+    skill5: { de: 'Power BI', en: 'Power BI' },
+    skill6: { de: 'Excel (Power Query, Pivot, SVERWEIS)', en: 'Excel (Power Query, Pivot, VLOOKUP)' },
+    skill7: { de: 'Microsoft 365 Copilot', en: 'Microsoft 365 Copilot' },
+    skill8: { de: 'AI-Tooling & Prompting', en: 'AI Tooling & Prompting' },
+    
+    // Contact section
+    contactHeading: { de: 'Kontakt', en: 'Contact' },
+    contactText: { de: 'Für Kooperationen, Ideen oder Fragen – am besten telefonisch erreichbar.', en: 'For collaborations, ideas, or questions — best reached by phone.' },
+    contactCtaEmail: { de: 'E‑Mail schreiben', en: 'Send Email' },
+    contactCtaDownload: { de: 'CV herunterladen', en: 'Download CV' },
+    
+    // Footer
+    footerContact: { de: 'Kontakt', en: 'Contact' },
+    
+    // Language toggle aria-label
+    langToggleAriaLabel: { de: 'Sprache wählen', en: 'Select language' }
+  };
+
+  let currentLang = 'de';
+  
+  // Safe list of allowed HTML tags for translations that need formatting
+  const ALLOWED_TAGS = ['strong', 'em', 'b', 'i'];
+  
+  // Sanitize HTML to only allow safe tags (strong, em for formatting)
+  function sanitizeHTML(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    let result = div.innerHTML;
+    // Re-enable only safe tags
+    ALLOWED_TAGS.forEach(tag => {
+      const openTag = new RegExp('&lt;' + tag + '&gt;', 'gi');
+      const closeTag = new RegExp('&lt;/' + tag + '&gt;', 'gi');
+      result = result.replace(openTag, '<' + tag + '>');
+      result = result.replace(closeTag, '</' + tag + '>');
+    });
+    return result;
+  }
+
+  // Apply translations
+  function applyLanguage(lang) {
+    currentLang = lang;
+    
+    // Update HTML lang attribute
+    document.getElementById('html-root').setAttribute('lang', lang);
+    
+    // Update all elements with data-i18n attribute
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[key] && translations[key][lang]) {
+        // Use sanitized HTML for translations that may contain formatting tags
+        el.innerHTML = sanitizeHTML(translations[key][lang]);
+      }
+    });
+    
+    // Update alt attributes (always plain text)
+    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+      const key = el.getAttribute('data-i18n-alt');
+      if (translations[key] && translations[key][lang]) {
+        el.setAttribute('alt', translations[key][lang]);
+      }
+    });
+    
+    // Update aria-label attributes (always plain text)
+    document.querySelectorAll('[data-i18n-arialabel]').forEach(el => {
+      const key = el.getAttribute('data-i18n-arialabel');
+      if (translations[key] && translations[key][lang]) {
+        el.setAttribute('aria-label', translations[key][lang]);
+      }
+    });
+    
+    // Update mailto subject lines with proper URL encoding
+    document.querySelectorAll('[data-i18n-subject-' + lang + ']').forEach(el => {
+      const subject = el.getAttribute('data-i18n-subject-' + lang);
+      const href = el.getAttribute('href');
+      if (href && href.startsWith('mailto:')) {
+        const baseEmail = href.split('?')[0];
+        // Properly encode the subject for URL
+        el.setAttribute('href', baseEmail + '?subject=' + encodeURIComponent(decodeURIComponent(subject)));
+      }
+    });
+    
+    // Update language toggle aria-label from translations
+    const langToggle = document.querySelector('.lang-toggle');
+    if (langToggle && translations.langToggleAriaLabel && translations.langToggleAriaLabel[lang]) {
+      langToggle.setAttribute('aria-label', translations.langToggleAriaLabel[lang]);
+    }
+    
+    // Update button states
+    document.getElementById('lang-de').setAttribute('aria-pressed', lang === 'de' ? 'true' : 'false');
+    document.getElementById('lang-en').setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
+    
+    // Save preference
+    try {
+      localStorage.setItem('preferredLang', lang);
+    } catch (e) {
+      // localStorage not available
+    }
+  }
+
+  // Initialize on DOMContentLoaded
+  function init() {
+    // Get saved language preference or default to 'de'
+    let savedLang = 'de';
+    try {
+      savedLang = localStorage.getItem('preferredLang') || 'de';
+    } catch (e) {
+      // localStorage not available
+    }
+    
+    // Validate saved language
+    if (savedLang !== 'de' && savedLang !== 'en') {
+      savedLang = 'de';
+    }
+    
+    // Apply initial language
+    applyLanguage(savedLang);
+    
+    // Add event listeners to language buttons
+    document.getElementById('lang-de').addEventListener('click', function() {
+      applyLanguage('de');
+    });
+    document.getElementById('lang-en').addEventListener('click', function() {
+      applyLanguage('en');
+    });
+  }
+
+  // Run on DOMContentLoaded or immediately if DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
 </script>
 </body>
