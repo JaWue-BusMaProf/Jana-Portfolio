@@ -679,11 +679,13 @@ header.hero .hero-inner .hero-card .hero-sub,
   <article class="card" style="padding:14px;">
     <h3 style="margin:0 0 8px 0" data-i18n="cardHardSoftTitle">Hard- & Softskills</h3>
 
-    <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png" target="_blank" rel="noopener" aria-label="Screenshot in neuem Tab öffnen">
+    <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png" target="_blank" rel="noopener" aria-label="Screenshot in neuem Tab öffnen" data-href-de="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png" data-href-en="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft_en.png">
       <img
         src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png"
         alt="Screenshot des Power BI Sales Dashboard"
         data-i18n-alt="imgAltHardSoft"
+        data-src-de="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png"
+        data-src-en="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft_en.png"
         style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
       />
     </a>
@@ -697,11 +699,13 @@ header.hero .hero-inner .hero-card .hero-sub,
   <article class="card" style="padding:14px;">
     <h3 style="margin:0 0 8px 0" data-i18n="cardImpactTitle">Impact vs. Effort — Analyse</h3>
 
-    <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png" target="_blank" rel="noopener" aria-label="Impact vs Effort Bild in neuem Tab öffnen">
+    <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png" target="_blank" rel="noopener" aria-label="Impact vs Effort Bild in neuem Tab öffnen" data-href-de="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png" data-href-en="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort_en.png">
       <img
         src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png"
         alt="Impact vs Effort Visual"
         data-i18n-alt="imgAltImpact"
+        data-src-de="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png"
+        data-src-en="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort_en.png"
         style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
       />
     </a>
@@ -715,11 +719,13 @@ header.hero .hero-inner .hero-card .hero-sub,
   <article class="card" style="padding:14px;">
     <h3 style="margin:0 0 8px 0" data-i18n="cardInterestsTitle">Interessen</h3>
 
-    <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png" target="_blank" rel="noopener" aria-label="Interessen Bild in neuem Tab öffnen">
+    <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png" target="_blank" rel="noopener" aria-label="Interessen Bild in neuem Tab öffnen" data-href-de="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png" data-href-en="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen_en.png">
       <img
         src="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png"
         alt="Interessen Visual"
         data-i18n-alt="imgAltInterests"
+        data-src-de="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png"
+        data-src-en="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen_en.png"
         style="width:100%; height:auto; border-radius:8px; display:block; box-shadow:0 6px 18px rgba(2,6,23,0.08);"
       />
     </a>
@@ -1064,6 +1070,31 @@ header.hero .hero-inner .hero-card .hero-sub,
     return result;
   }
 
+  // Update language-specific images and links
+  function setLangImages(lang) {
+    // Update images with language-specific sources
+    document.querySelectorAll('[data-src-de][data-src-en]').forEach(img => {
+      const srcDe = img.getAttribute('data-src-de');
+      const srcEn = img.getAttribute('data-src-en');
+      img.src = (lang === 'en' && srcEn) ? srcEn : srcDe;
+    });
+    
+    // Update alt text for images with i18n translations
+    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+      const key = el.getAttribute('data-i18n-alt');
+      if (translations[key]) {
+        el.alt = translations[key][lang] || translations[key].de;
+      }
+    });
+    
+    // Update links with language-specific hrefs
+    document.querySelectorAll('[data-href-de][data-href-en]').forEach(a => {
+      const hrefDe = a.getAttribute('data-href-de');
+      const hrefEn = a.getAttribute('data-href-en');
+      a.href = (lang === 'en' && hrefEn) ? hrefEn : hrefDe;
+    });
+  }
+
   // Apply translations
   function applyLanguage(lang) {
     currentLang = lang;
@@ -1123,6 +1154,9 @@ header.hero .hero-inner .hero-card .hero-sub,
     } catch (e) {
       // localStorage not available
     }
+    
+    // Update language-specific images and links
+    setLangImages(lang);
   }
 
   // Initialize on DOMContentLoaded
