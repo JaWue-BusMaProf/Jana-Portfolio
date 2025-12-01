@@ -489,6 +489,33 @@ header.hero .hero-inner .hero-card .hero-sub,
 }
   #bg-splats { display: none !important; }
 }
+    /* Language switcher styles */
+    .lang-switch {
+      display: inline-flex;
+      gap: 6px;
+      margin-left: auto;
+    }
+    .lang-switch button {
+      background: transparent;
+      border: 2px solid transparent;
+      border-radius: 4px;
+      padding: 2px;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 0.2s ease, border-color 0.2s ease;
+    }
+    .lang-switch button:hover {
+      opacity: 1;
+    }
+    .lang-switch button.active {
+      opacity: 1;
+      border-color: var(--accent, #084a9a);
+    }
+    .lang-switch button img {
+      display: block;
+      width: 24px;
+      height: auto;
+    }
   </style>
 </head>
  <!-- Power BI Lightbox Modal (insert once before </body>) -->
@@ -578,10 +605,18 @@ header.hero .hero-inner .hero-card .hero-sub,
   <header class="hero" role="banner" aria-label="Hero: Jana Wünsch">
     <div class="hero-inner">
       <div class="hero-card" role="region" aria-labelledby="hero-heading">
-        <div class="hero-top">
+        <div class="hero-top" style="display:flex; justify-content:space-between; align-items:flex-start;">
           <div>
-            <h1 id="hero-heading" class="hero-title">Jana Wünsch</h1>
-            <p class="hero-sub accent">Business Master Professional — Digitalisierung • Data • Prozesse</p>
+            <h1 id="hero-heading" class="hero-title" data-i18n="hero.title">Jana Wünsch</h1>
+            <p class="hero-sub accent" data-i18n="hero.subtitle">Business Master Professional — Digitalisierung • Data • Prozesse</p>
+          </div>
+          <div class="lang-switch" role="group" aria-label="Sprache wählen">
+            <button data-lang-btn="de" title="Deutsch" aria-label="Deutsch">
+              <img src="assets/flags/de.svg" alt="DE">
+            </button>
+            <button data-lang-btn="en" title="English" aria-label="English">
+              <img src="assets/flags/gb.svg" alt="EN">
+            </button>
           </div>
         </div>
 
@@ -709,7 +744,7 @@ header.hero .hero-inner .hero-card .hero-sub,
       </section>
 
       <section id="contact" class="card reveal" aria-labelledby="contact-heading">
-        <h2 id="contact-heading">Kontakt</h2>
+        <h2 id="contact-heading" data-i18n="contact.title">Kontakt</h2>
         <p>Für Kooperationen, Ideen oder Fragen – am besten telefonisch erreichbar.</p>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px">
@@ -909,5 +944,6 @@ header.hero .hero-inner .hero-card .hero-sub,
   updateTarget();
 })();
 </script>
+<script src="js/i18n.js"></script>
 </body>
 </html>
