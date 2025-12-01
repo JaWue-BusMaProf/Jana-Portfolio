@@ -19,7 +19,7 @@
     if (stored && SUPPORTED_LANGS.indexOf(stored) !== -1) {
       return stored;
     }
-    var browserLang = (navigator.language || navigator.userLanguage || '').slice(0, 2).toLowerCase();
+    var browserLang = (navigator.language || '').slice(0, 2).toLowerCase();
     if (SUPPORTED_LANGS.indexOf(browserLang) !== -1) {
       return browserLang;
     }

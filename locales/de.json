@@ -1,1 +1,8 @@
-{"nav.home":"Start","nav.about":"Über mich","nav.projects":"Projekte","hero.title":"Hallo, ich bin Jana","hero.subtitle":"Ich bin Frontend-Entwicklerin","contact.title":"Kontakt"}
+{
+  "nav.home": "Start",
+  "nav.about": "Über mich",
+  "nav.projects": "Projekte",
+  "hero.title": "Jana Wünsch",
+  "hero.subtitle": "Business Master Professional — Digitalisierung • Data • Prozesse",
+  "contact.title": "Kontakt"
+}
