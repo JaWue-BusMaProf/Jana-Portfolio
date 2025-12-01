@@ -1095,7 +1095,17 @@ header.hero .hero-inner .hero-card .hero-sub,
     });
   }
 
-  // Update CV download links based on current language
+  /**
+   * Update CV download links based on current language
+   * @param {string} lang - The language code ('de' for German, 'en' for English)
+   * 
+   * Updates all links with the 'cv-download' class to point to the appropriate CV file.
+   * - German (de): Uses data-src-de attribute value (Lebenslauf.pdf)
+   * - English (en): Uses data-src-en attribute value (Lebenslauf_en.pdf)
+   * 
+   * This function is idempotent and safe: if data-src-de or data-src-en attributes
+   * are missing, the href is left unchanged.
+   */
   function updateCVLinks(lang) {
     document.querySelectorAll('.cv-download').forEach(link => {
       const srcDe = link.getAttribute('data-src-de');
