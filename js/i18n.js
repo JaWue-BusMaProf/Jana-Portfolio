@@ -102,7 +102,12 @@
    * Get base URL for relative paths
    */
   function getBaseUrl() {
-    return document.baseURI.replace(/\/[^/]*$/, '/');
+    try {
+      return new URL('./', document.baseURI).href;
+    } catch (e) {
+      // Fallback for older browsers
+      return document.baseURI.replace(/\/[^/]*$/, '/');
+    }
   }
 
   /**
@@ -118,17 +123,17 @@
 
     // Try to fetch from JSON file first
     try {
-      const baseUrl = getBaseUrl();
-      const url = baseUrl + 'locales/' + lang + '.json';
-      const response = await fetch(url);
+      var baseUrl = getBaseUrl();
+      var url = baseUrl + 'locales/' + lang + '.json';
+      var response = await fetch(url);
       if (response.ok) {
-        const data = await response.json();
+        var data = await response.json();
         cache[lang] = data;
         return data;
       }
     } catch (e) {
       // Fetch failed, use fallback
-      console.log('i18n: Using fallback translations for', lang);
+      console.log('i18n: Failed to load translations for', lang, '- using fallback:', e.message || e);
     }
 
     // Fall back to embedded translations
