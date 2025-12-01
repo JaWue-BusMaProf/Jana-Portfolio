@@ -489,50 +489,15 @@ header.hero .hero-inner .hero-card .hero-sub,
 }
   #bg-splats { display: none !important; }
 }
-/* Language Switcher Styles */
-.lang-switch {
-  display: inline-flex;
-  gap: 4px;
-  margin-left: 8px;
-  align-items: center;
-}
-.lang-btn {
-  background: transparent;
-  border: 2px solid transparent;
-  border-radius: 4px;
-  padding: 4px 6px;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.lang-btn:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
-.lang-btn.active {
-  opacity: 1;
-  border-color: rgba(255,255,255,0.3);
-}
-.lang-btn:focus {
-  outline: 2px solid rgba(99,150,255,0.4);
-  outline-offset: 2px;
-}
-.lang-btn img {
-  display: block;
-  pointer-events: none;
-}
   </style>
 </head>
  <!-- Power BI Lightbox Modal (insert once before </body>) -->
 <div id="pb-modal" role="dialog" aria-hidden="true" aria-label="Power BI Vorschau" style="display:none; position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);">
   <div style="max-width:1100px;width:94%;max-height:88vh;border-radius:10px;overflow:auto;background:#fff;padding:12px;box-shadow:0 20px 60px rgba(2,6,23,0.5);position:relative;">
-    <button id="pb-modal-close" aria-label="Schließen" style="position:absolute;right:8px;top:8px;background:#fff;border:1px solid #ddd;border-radius:6px;padding:6px 8px;cursor:pointer;" data-i18n-aria="modal.close">✕</button>
+    <button id="pb-modal-close" aria-label="Schließen" style="position:absolute;right:8px;top:8px;background:#fff;border:1px solid #ddd;border-radius:6px;padding:6px 8px;cursor:pointer;">✕</button>
     <img id="pb-modal-img" src="" alt="Große Vorschau Power BI Dashboard" style="width:100%;height:auto;border-radius:6px;display:block;" />
     <div style="margin-top:8px;display:flex;gap:8px;align-items:center;justify-content:flex-end;">
-      <a id="pb-modal-open-link" href="#" target="_blank" rel="noopener" style="background:#0b66c3;color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;" data-i18n="modal.open">Interaktiven Report öffnen</a>
+      <a id="pb-modal-open-link" href="#" target="_blank" rel="noopener" style="background:#0b66c3;color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;">Interaktiven Report öffnen</a>
     </div>
   </div>
 </div> 
@@ -615,26 +580,17 @@ header.hero .hero-inner .hero-card .hero-sub,
       <div class="hero-card" role="region" aria-labelledby="hero-heading">
         <div class="hero-top">
           <div>
-            <h1 id="hero-heading" class="hero-title" data-i18n="hero.name">Jana Wünsch</h1>
-            <p class="hero-sub accent" data-i18n="hero.subtitle">Business Master Professional — Digitalisierung • Data • Prozesse</p>
+            <h1 id="hero-heading" class="hero-title">Jana Wünsch</h1>
+            <p class="hero-sub accent">Business Master Professional — Digitalisierung • Data • Prozesse</p>
           </div>
         </div>
 
-        <p class="tagline" data-i18n="hero.tagline">Diese Seite ist ein eigenes Projekt: umgesetzt ohne Programmierkenntnisse, mit Copilot & selbst erlernten HTML-Basics. Learning-Mindset trifft Business-Expertise.</p>
+        <p class="tagline">Diese Seite ist ein eigenes Projekt: umgesetzt ohne Programmierkenntnisse, mit Copilot & selbst erlernten HTML-Basics. Learning-Mindset trifft Business-Expertise.</p>
 
         <div class="cta-group" role="navigation" aria-label="Call to actions">
-  <a class="btn primary" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio" title="E-Mail schreiben" data-i18n="hero.contact" data-i18n-title="hero.contact">Kontakt</a>
-  <a class="btn ghost" href="Lebenslauf.pdf" download title="CV herunterladen" data-i18n="hero.cv" data-i18n-title="hero.cv">CV herunterladen</a>
-  <a class="btn ghost" href="#portfolio" title="Portfolio / Dashboards" data-i18n="hero.portfolio" data-i18n-title="hero.portfolio">Portfolio</a>
-  <!-- Language Switcher -->
-  <div class="lang-switch" role="group" aria-label="Sprache wählen / Choose language">
-    <button type="button" data-lang-btn="de" class="lang-btn active" aria-pressed="true" title="Deutsch">
-      <img src="assets/flags/de.svg" alt="DE" width="24" height="14">
-    </button>
-    <button type="button" data-lang-btn="en" class="lang-btn" aria-pressed="false" title="English">
-      <img src="assets/flags/gb.svg" alt="EN" width="24" height="12">
-    </button>
-  </div>
+  <a class="btn primary" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio" title="E-Mail schreiben">Kontakt</a>
+  <a class="btn ghost" href="Lebenslauf.pdf" download title="CV herunterladen">CV herunterladen</a>
+  <a class="btn ghost" href="#portfolio" title="Portfolio / Dashboards">Portfolio</a>
 </div>
       </div>
     </div>
@@ -644,31 +600,31 @@ header.hero .hero-inner .hero-card .hero-sub,
     <div class="panel wrap">
       <section class="row columns-2 reveal" id="about" aria-labelledby="about-heading">
         <div class="card" role="article" aria-labelledby="about-heading">
-          <h2 id="about-heading" data-i18n="about.title">Über mich</h2>
-          <p data-i18n="about.text">Ich bin Betriebswirtin mit großer Leidenschaft für Digitalisierung, KI und datengestützte Entscheidungen. Wenn moderne Tools Prozesse vereinfachen, Entscheidungen verbessern oder Workflows spürbar beschleunigen, ergibt sich echter Mehrwert.</p>
+          <h2 id="about-heading">Über mich</h2>
+          <p>Ich bin Betriebswirtin mit großer Leidenschaft für Digitalisierung, KI und datengestützte Entscheidungen. Wenn moderne Tools Prozesse vereinfachen, Entscheidungen verbessern oder Workflows spürbar beschleunigen, ergibt sich echter Mehrwert.</p>
 
-          <h3 style="margin-top:14px; margin-bottom:8px; color:var(--muted); font-size:14px" data-i18n="about.core">Kern</h3>
+          <h3 style="margin-top:14px; margin-bottom:8px; color:var(--muted); font-size:14px">Kern</h3>
           <ul>
-            <li data-i18n="about.core.1">Controlling, Reporting & KPI-Analysen</li>
-            <li data-i18n="about.core.2">Microsoft Excel (Pivot, SVERWEIS)</li>
-            <li data-i18n="about.core.3">Microsoft 365 Copilot & Power BI (aktuelle Weiterbildung)</li>
-            <li data-i18n="about.core.4">Analytisches Denken, Prozessoptimierung, Teamarbeit</li>
-            <li data-i18n="about.core.5">KI Management</li>
+            <li>Controlling, Reporting & KPI-Analysen</li>
+            <li>Microsoft Excel (Pivot, SVERWEIS)</li>
+            <li>Microsoft 365 Copilot & Power BI (aktuelle Weiterbildung)</li>
+            <li>Analytisches Denken, Prozessoptimierung, Teamarbeit</li>
+            <li>KI Management</li>
           </ul>
         </div>
 
         <aside class="card" role="complementary" aria-labelledby="profile-heading">
-          <h2 id="profile-heading" data-i18n="profile.title">Kurzprofil</h2>
+          <h2 id="profile-heading">Kurzprofil</h2>
           <div style="margin-top:14px">
-            <h3 style="margin:0 0 8px 0; font-size:14px" data-i18n="profile.jobtitle.label">Jobtitel</h3>
-          <p style="margin-top:8px; font-weight:600" data-i18n="profile.jobtitle">Master Professional in Business Management</p>
+            <h3 style="margin:0 0 8px 0; font-size:14px">Jobtitel</h3>
+          <p style="margin-top:8px; font-weight:600">Master Professional in Business Management</p>
 
           <div style="margin-top:14px">
-            <h3 style="margin:0 0 8px 0; font-size:14px" data-i18n="profile.contact.label">Kontakt</h3>
+            <h3 style="margin:0 0 8px 0; font-size:14px">Kontakt</h3>
             <div class="meta">
-  <div><strong data-i18n="profile.email">Email:</strong> <a href="mailto:j_rommel@outlook.com">j_rommel@outlook.com</a></div>
-  <div><strong data-i18n="profile.phone">Tel:</strong> <a href="tel:+4917632423319">+49 176 32423319</a></div>
-  <div><strong data-i18n="profile.instagram">Instagram:</strong> <a href="https://instagram.com/wnh.jn" target="_blank" rel="noopener">@wnh.jn</a></div>
+  <div><strong>Email:</strong> <a href="mailto:j_rommel@outlook.com">j_rommel@outlook.com</a></div>
+  <div><strong>Tel:</strong> <a href="tel:+4917632423319">+49 176 32423319</a></div>
+  <div><strong>Instagram:</strong> <a href="https://instagram.com/wnh.jn" target="_blank" rel="noopener">@wnh.jn</a></div>
 </div>
           </div>
 
@@ -676,12 +632,12 @@ header.hero .hero-inner .hero-card .hero-sub,
       </section>
 
       <section id="portfolio" class="card reveal" aria-labelledby="portfolio-heading">
-        <h2 id="portfolio-heading" data-i18n="portfolio.title">Portfolio — Skills, ausgewählte eigene Projekte & Privat</h2>
+        <h2 id="portfolio-heading">Portfolio — Skills, ausgewählte eigene Projekte & Privat</h2>
         <div class="dashboard-grid" style="margin-top:12px">
 
   <!-- vorhandene Karte: Power BI — Screenshot (screen_hard_soft) -->
   <article class="card" style="padding:14px;">
-    <h3 style="margin:0 0 8px 0" data-i18n="portfolio.hardsoft.title">Hard- & Softskills</h3>
+    <h3 style="margin:0 0 8px 0">Hard- & Softskills</h3>
 
     <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/screen_hard_soft.png" target="_blank" rel="noopener" aria-label="Screenshot in neuem Tab öffnen">
       <img
@@ -691,14 +647,14 @@ header.hero .hero-inner .hero-card .hero-sub,
       />
     </a>
 
-    <p class="muted" style="margin-top:8px" data-i18n="portfolio.hardsoft.desc">
+    <p class="muted" style="margin-top:8px">
       Meine am stärksten ausgeprägten Fähigkeiten im Überblick.
     </p>
   </article>
 
   <!-- neue Karte: Impact vs. Effort -->
   <article class="card" style="padding:14px;">
-    <h3 style="margin:0 0 8px 0" data-i18n="portfolio.impact.title">Impact vs. Effort — Analyse</h3>
+    <h3 style="margin:0 0 8px 0">Impact vs. Effort — Analyse</h3>
 
     <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Impact_Effort.png" target="_blank" rel="noopener" aria-label="Impact vs Effort Bild in neuem Tab öffnen">
       <img
@@ -708,14 +664,14 @@ header.hero .hero-inner .hero-card .hero-sub,
       />
     </a>
 
-    <p class="muted" style="margin-top:8px" data-i18n="portfolio.impact.desc">
+    <p class="muted" style="margin-top:8px">
       Mit jedem Projekt wurden meine Ergebnisse stärker – und der nötige Aufwand geringer.
     </p>
   </article>
 
   <!-- neue Karte: Interessen -->
   <article class="card" style="padding:14px;">
-    <h3 style="margin:0 0 8px 0" data-i18n="portfolio.interests.title">Interessen</h3>
+    <h3 style="margin:0 0 8px 0">Interessen</h3>
 
     <a href="https://raw.githubusercontent.com/JaWue-BusMaProf/Jana-Portfolio/main/Interessen.png" target="_blank" rel="noopener" aria-label="Interessen Bild in neuem Tab öffnen">
       <img
@@ -725,7 +681,7 @@ header.hero .hero-inner .hero-card .hero-sub,
       />
     </a>
 
-    <p class="muted" style="margin-top:8px" data-i18n="portfolio.interests.desc">
+    <p class="muted" style="margin-top:8px">
       Was mich inspiriert und im Gleichgewicht hält.
     </p>
   </article>
@@ -735,30 +691,30 @@ header.hero .hero-inner .hero-card .hero-sub,
       </section>
 
       <section id="laufbahn" class="card reveal" aria-labelledby="laufbahn-heading">
-        <h2 id="laufbahn-heading" class="accent" data-i18n="career.title">Laufbahn</h2>
+        <h2 id="laufbahn-heading" class="accent">Laufbahn</h2>
         <ol style="margin:0 0 0 18px; padding:0; color:var(--muted)">
-          <li style="margin-bottom:8px" data-i18n="career.1"><strong>06/2025–heute</strong> — Weiterbildung zur KI-Managerin (IHK)</li>
-          <li style="margin-bottom:8px" data-i18n="career.2"><strong>2024</strong> — <em>Betriebswirtin</em></li>
-          <li style="margin-bottom:8px" data-i18n="career.3"><strong>10/2022–06/2025</strong> — Stellvertretende kaufmännische Leitung</li>
-          <li style="margin-bottom:8px" data-i18n="career.4"><strong>01/2019-10/2022</strong> — Kaufmännische Angestellte</li>
-          <li style="margin-bottom:8px" data-i18n="career.5"><strong>2018</strong> — <em>Handelsfachwirtin</em></li>
+          <li style="margin-bottom:8px"><strong>06/2025–heute</strong> — Weiterbildung zur KI-Managerin (IHK)</li>
+          <li style="margin-bottom:8px"><strong>2024</strong> — <em>Betriebswirtin</em></li>
+          <li style="margin-bottom:8px"><strong>10/2022–06/2025</strong> — Stellvertretende kaufmännische Leitung</li>
+          <li style="margin-bottom:8px"><strong>01/2019-10/2022</strong> — Kaufmännische Angestellte</li>
+          <li style="margin-bottom:8px"><strong>2018</strong> — <em>Handelsfachwirtin</em></li>
         </ol>
       </section>
 
       <section id="skills" class="card reveal" aria-labelledby="skills-heading">
-        <h2 id="skills-heading" data-i18n="skills.title">Skills & Tools</h2>
+        <h2 id="skills-heading">Skills & Tools</h2>
         <ul class="skills" aria-label="Liste der Fähigkeiten">
           <li>Controlling</li><li>Reporting</li><li>Prozessoptimierung</li><li>KPI-Analyse</li><li>Power BI</li><li>Excel (Power Query, Pivot, SVERWEIS)</li><li>Microsoft 365 Copilot</li><li>AI-Tooling & Prompting</li>
         </ul>
       </section>
 
       <section id="contact" class="card reveal" aria-labelledby="contact-heading">
-        <h2 id="contact-heading" data-i18n="contact.title">Kontakt</h2>
-        <p data-i18n="contact.text">Für Kooperationen, Ideen oder Fragen – am besten telefonisch erreichbar.</p>
+        <h2 id="contact-heading">Kontakt</h2>
+        <p>Für Kooperationen, Ideen oder Fragen – am besten telefonisch erreichbar.</p>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px">
-  <a class="btn primary" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio" data-i18n="contact.email">E‑Mail schreiben</a>
-  <a class="btn ghost" href="Lebenslauf.pdf" download data-i18n="contact.cv">CV herunterladen</a>
+  <a class="btn primary" href="mailto:j_rommel@outlook.com?subject=Kontakt%20via%20Portfolio">E‑Mail schreiben</a>
+  <a class="btn ghost" href="Lebenslauf.pdf" download>CV herunterladen</a>
 </div>
 
       </section>
@@ -768,7 +724,7 @@ header.hero .hero-inner .hero-card .hero-sub,
 
   <footer class="site-footer" role="contentinfo">
     <div class="wrap">
-      © <span id="year"></span> <span data-i18n="footer.text">Jana Wünsch — Business Master Professional</span> • <a href="#contact" data-i18n="footer.contact">Kontakt</a>
+      © <span id="year"></span> Jana Wünsch — Business Master Professional • <a href="#contact">Kontakt</a>
     </div>
   </footer>
 
@@ -953,7 +909,5 @@ header.hero .hero-inner .hero-card .hero-sub,
   updateTarget();
 })();
 </script>
-<!-- i18n Language Switcher -->
-<script src="js/i18n.js"></script>
 </body>
 </html>
